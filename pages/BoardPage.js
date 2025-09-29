@@ -7,6 +7,7 @@ export class BoardPage {
     this.popoverMenu = "#account-menu-popover-content";
     this.logoutButton = "button[data-testid='account-menu-logout']";
     this.confirmLogoutButton = "button#logout-submit"; // Atlassian
+    this.botonTablero = '//*[@id="content"]/div/div/div/main/div/div[3]/div[1]/div[2]/div/a/div/div[2]' // boton tablero
   }
 
   async openProfileMenu() {
@@ -15,6 +16,11 @@ export class BoardPage {
     await this.page.dblclick(this.profileButton);
     await this.page.click(this.profileButton);
 
+  }
+  //abrir el tablero
+  async clickBotonTablero() {
+    await this.page.waitForSelector(this.botonTablero, { state: "visible" });
+    await this.page.click(this.botonTablero);
   }
 
   async clickLogout() {
