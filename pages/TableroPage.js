@@ -1,13 +1,18 @@
 import { expect } from "@playwright/test";
 
+
+
 export class TableroPage {
     constructor(page) {
     this.page = page;
     this.crearLista= "button[data-testid='list-composer-button']"; 
-    this.agregarNombreLista='//*[@id="board"]/div/div[2]/form/textarea'
-    this.botonAceptar='//*[@id="board"]/div/div[2]/form/div/button[1]'
+    this.agregarNombreLista='//*[@id="board"]/div/div[2]/form/textarea';
+    this.botonAceptar='//*[@id="board"]/div/div[2]/form/div/button[1]';
     }
-
+    //ir a tablero
+    /**async goTablero() {
+        await this.page.goto(process.env.TRELLO_BOARD_URL);
+    }*/
     async agregarLista(){
         await this.page.click(this.crearLista)
         await this.page.waitForSelector(this.agregarNombreLista)
