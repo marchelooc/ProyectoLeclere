@@ -1,6 +1,7 @@
 // fixtures/fixtures.js
 import { test as base } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage.js";
+import { BoardPage } from "../pages/BoardPage.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -18,6 +19,12 @@ export const test = base.extend({
     // entregar la página ya logueada al test
     await use(page);
   },
+
+  createFixture: async ({ page }, use) => {
+    const boardPage = new BoardPage(page);
+    await boardPage.createBoard();
+    await use(page);
+  },
 });
 
 export const expect = base.expect;
