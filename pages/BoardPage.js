@@ -38,4 +38,5 @@ export class BoardPage {
     // validar que vuelves al home de Trello
     await expect(this.page).toHaveURL("https://trello.com/");
   }
+  
 }

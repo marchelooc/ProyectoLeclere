@@ -19,6 +19,13 @@ test("Crear card con numero de caracteres no permitido", async ({ loginFixture }
   await cardPage.gotoCardPage()
 });
 
+test("Crear card sin nombre", async ({ loginFixture }) => {
+  const page = loginFixture;
+  const cardPage = new CardPage(page);
+  await page.waitForTimeout(4000);
+  await cardPage.gotoCardPage()
+});
+
 test("Crear card con imagen.png", async ({ loginFixture }) => {
   const page = loginFixture;
   const cardPage = new CardPage(page);

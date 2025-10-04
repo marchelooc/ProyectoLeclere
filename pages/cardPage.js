@@ -36,6 +36,9 @@ export class CardPage {
     this.cloneConfirmBtnCard = this.page.locator(`button[data-testid="move-card-popover-move-button"]`);
     //copiar link
     this.copyLinkBtnCard = this.page.locator(`button[data-testid="quick-card-editor-copy-link"]`);
+    //mover card
+    this.moveCardBtn = this.page.locator(`button[data-testid="quick-card-editor-move"]`);
+
     
   }
 
@@ -160,7 +163,7 @@ export class CardPage {
     await this.cloneConfirmBtnCard.click();
   }
 
-  //---------------------------------------------------------------------------------------------
+
   async cardActionCopyLink() {
     await this.copyLinkBtnCard.click();
     const copiedLink = await this.page.evaluate(() => navigator.clipboard.readText());
@@ -169,6 +172,17 @@ export class CardPage {
   }
 
   //-------------------------------------------------------------------------------------------
+
+    async cardActionMoveList(listName) {
+    await this.moveCardBtn.click();
+    const listDropdown = this.page.getByTestId('move-card-popover-select-list-destination-select--input');
+    await listDropdown.click();
+    await this.page.getByRole('option', { name: listName }).click()
+    await this.cloneConfirmBtnCard.click();
+  }
+
+
+  //---------------------------------------------------------------------------------------------
 
   async closeDialogCard() {
     await this.closeDialogBtn.click();
