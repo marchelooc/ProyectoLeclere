@@ -24,8 +24,19 @@ export class CardPage {
     this.membersCard = this.page.locator(`[data-testid="quick-card-editor-change-members"]`);
     //archivar cards
     this.storeCardBtn = this.page.locator(`[data-testid="quick-card-editor-archive"]`);
-    //editar fechas
+    //editar recordatorio / fechas
     this.dateCardBtn = this.page.locator(`[data-testid="quick-card-editor-edit-dates"]`);
+    this.dateReminderCardListBtn = this.page.getByTestId('due-reminder-select-select--control')
+    this.addReminderBtn = this.page.locator('button[data-testid="save-date-button"]');
+    //fechas
+    this.startDateLabel = this.page.locator('input[data-testid="start-date-field"]');
+    this.finDateLabel = this.page.locator('input[data-testid="due-date-field"]');
+    //clonar card
+    this.cloneBtnCard = this.page.locator(`button[data-testid="quick-card-editor-copy"]`);
+    this.cloneConfirmBtnCard = this.page.locator(`button[data-testid="move-card-popover-move-button"]`);
+    //copiar link
+    this.copyLinkBtnCard = this.page.locator(`button[data-testid="quick-card-editor-copy-link"]`);
+    
   }
 
   async gotoCardPage() {
@@ -109,19 +120,55 @@ export class CardPage {
   async storeCard(){
     await this.storeCardBtn.click();
   }
-  //---------------------------------------------------------------------
-    async cardActionEditReminder(miembro) {
+  async cardActionEditReminder(option) {
     const dialog = this.page.getByRole('dialog', { name: 'Fechas' });
     if (!(await dialog.isVisible())) {
       await this.dateCardBtn.click();
-      await dialog.waitFor()
+      //await dialog.waitFor()
+      //await dialog.waitFor({ state: 'visible' });
     }
-    const nameMemberbtn = dialog.getByRole('button', { name: `${miembro}` });
-    await nameMemberbtn.click();
+    await this.dateReminderCardListBtn.click();
+    await this.page.getByRole('option', { name: option }).click();
+    await this.addReminderBtn.click();
   }
-  //---------------------------------------------------------------------
 
+  async cardActionEditDates(iniDate , finDate) {
+    const dialog = this.page.getByRole('dialog', { name: 'Fechas' });
+    if (!(await dialog.isVisible())) {
+      await this.dateCardBtn.click();
+      //await dialog.waitFor()
+      //await dialog.waitFor({ state: 'visible' });
+    }
+    const startDateCheckbox = this.page.locator('input[type="checkbox"][aria-labelledby="date-field-label-Fecha de inicio"]');
+    const finDateCheckbox = this.page.locator('input[type="checkbox"][aria-labelledby="date-field-label-Fecha de vencimiento"]');
+    if (!(await startDateCheckbox.isChecked())) {
+      await startDateCheckbox.check({ force: true });
+    }
+    if (!(await finDateCheckbox.isChecked())) {
+      await finDateCheckbox.check({ force: true });
+    }
+    await this.startDateLabel.fill(iniDate);
+    await this.finDateLabel.fill(finDate);
+    await this.addReminderBtn.click();
+  }
 
+  async cardActionClone(listName) {
+    await this.cloneBtnCard.click();
+    const listDropdown = this.page.getByTestId('move-card-popover-select-list-destination-select--input-container');
+    await listDropdown.click();
+    await this.page.getByRole('option', { name: listName }).click()
+    await this.cloneConfirmBtnCard.click();
+  }
+
+  //---------------------------------------------------------------------------------------------
+  async cardActionCopyLink() {
+    await this.copyLinkBtnCard.click();
+    const copiedLink = await this.page.evaluate(() => navigator.clipboard.readText());
+    const newPage = await this.page.context().newPage();
+    await newPage.goto(copiedLink);
+  }
+
+  //-------------------------------------------------------------------------------------------
 
   async closeDialogCard() {
     await this.closeDialogBtn.click();

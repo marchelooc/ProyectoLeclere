@@ -60,21 +60,24 @@ test("archivar una card", async ({ loginFixture }) => {
   await cardPage.editCard("Tarjeta de prueba", "2");
   await cardPage.storeCard();
 });
-*/
 
 test("añadir recordatorio a una card", async ({ loginFixture }) => {
   const page = loginFixture;
   const cardPage = new CardPage(page);
   await page.waitForTimeout(4000);
   await cardPage.gotoCardPage()
+  await cardPage.editCard("HOLA", "PARA PRUEBA");
+  await cardPage.cardActionEditReminder('15 minutos antes')
+  await cardPage.cardActionEditReminder('1 hora antes')
 });
 
-/*
 test("editar fechas de vencimiento de una card", async ({ loginFixture }) => {
   const page = loginFixture;
   const cardPage = new CardPage(page);
   await page.waitForTimeout(4000);
   await cardPage.gotoCardPage()
+  await cardPage.editCard("HOLA", "PARA PRUEBA");
+  await cardPage.cardActionEditDates('10/10/2025','11/11/2025');
 });
 
 test("clonar una card", async ({ loginFixture }) => {
@@ -82,15 +85,21 @@ test("clonar una card", async ({ loginFixture }) => {
   const cardPage = new CardPage(page);
   await page.waitForTimeout(4000);
   await cardPage.gotoCardPage()
+  await cardPage.editCard("HOLA", "PARA PRUEBA");
+  await cardPage.cardActionClone("2")
 });
+*/
 
 test("copiar link de una card", async ({ loginFixture }) => {
   const page = loginFixture;
   const cardPage = new CardPage(page);
   await page.waitForTimeout(4000);
   await cardPage.gotoCardPage()
+  await cardPage.editCard("HOLA", "PARA PRUEBA");
+  await cardPage.cardActionCopyLink()
+  await page.waitForTimeout(4000);
 });
-
+/*
 test("mover una card a otra lista", async ({ loginFixture }) => {
   const page = loginFixture;
   const cardPage = new CardPage(page);

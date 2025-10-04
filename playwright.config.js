@@ -19,6 +19,8 @@ export default defineConfig({
     baseURL: process.env.BASE_URL || 'https://trello.com/',
     headless: process.env.HEADLESS !== 'true',
     trace: 'on-first-retry',
+    //permiso por si sale esos popup no toy para añadir una función que acepte cada vez
+    permissions: ['clipboard-read', 'clipboard-write'],
   },
   projects: [
     {
