@@ -1,6 +1,8 @@
 import { test, expect } from "../utils/fixtures.js";
 import { CardPage } from "../pages/cardPage.js";
-
+import CARDS from "../data/cardsInfo.json";
+import LABELS from "../data/cardsLabel.json";
+/*
 //helper papu
 async function setupCardTest(loginFixture, cardTitle = "HOLA", cardDesc = "PARA PRUEBA") {
   const page = loginFixture;
@@ -35,16 +37,18 @@ test("editar etiquetas de una card", async ({ loginFixture }) => {
   await expect(appliedLabel).toBeVisible();
 });
 
-test("crear etiquetas para una card", async ({ loginFixture }) => {
-  const { page, cardPage } = await setupCardTest(loginFixture);
-  await cardPage.cardActionAddLabel({ color: "red", title: "insertnombre" });
-  await cardPage.closeDialogCard();
+for (const label of LABELS) {
+  test(`Crear etiqueta de tipo: "${label.tipeLabel}"`, async ({ loginFixture }) => {
+    const { page, cardPage } = await setupCardTest(loginFixture);
+    await cardPage.cardActionAddLabel({ color: label.colorLabel, title: label.nameLabel });
+    await cardPage.closeDialogCard();
 
-  const appliedLabel = page
-    .locator('[data-testid="compact-card-label"][aria-label="Color: rojo, título: “insertnombre”"]')
+    const appliedLabel = page
+    .locator(`[data-testid="compact-card-label"][aria-label="Color: ${label.confirmColorLabel}, título: “${label.nameLabel}”"]`)
     .first();
   await expect(appliedLabel).toBeVisible();
-});
+  });
+}
 
 test("opcion de daltonicos para etiquetas para una card", async ({ loginFixture }) => {
   const { page, cardPage } = await setupCardTest(loginFixture);
@@ -66,7 +70,8 @@ test("editar miembros de una card", async ({ loginFixture }) => {
   await expect(appliedLabel).toBeVisible({ timeout: 8000 });
 });
 
-
+//añadir recordatorio a una card vencida
+//añadir recordatorio a una card sin fehca de vencimineto
 test("añadir recordatorio a una card", async ({ loginFixture }) => {
   const { page, cardPage } = await setupCardTest(loginFixture);
   await cardPage.cardActionEditReminder("15 minutos antes");
@@ -76,7 +81,14 @@ test("añadir recordatorio a una card", async ({ loginFixture }) => {
   await expect(appliedLabel).toBeVisible();
 });
 
-test("editar fechas de vencimiento de una card", async ({ loginFixture }) => {
+//añadir fecha inicio mayor a fecha final
+//añadir fecha final anterior
+//añadir fecha inicio muy en el futuro
+//añadir fecha de formato no establecido 1-1-2025
+//añadir fecha sin numeros 1 de marzo 2025
+//añadir fecha de vencimineto pero quitar la fecha final
+//añadir fecha inexistente ejemplo un 31 de un mes q solo tiene 28dias
+test("editar fechas de una card", async ({ loginFixture }) => {
   const { page, cardPage } = await setupCardTest(loginFixture);
   await cardPage.cardActionEditDates("10/10/2025", "11/11/2025");
 
@@ -102,16 +114,34 @@ test("mover una card a otra lista", async ({ loginFixture }) => {
 });
 
 //TEST PARA ELIMINAR
-test("archivar una card 1", async ({ loginFixture }) => {
-  const { cardPage } = await setupCardTest(loginFixture, "Tarjeta de prueba", "2");
-  await cardPage.storeCard();
-});
-test("archivar una card 2", async ({ loginFixture }) => {
-  const { cardPage } = await setupCardTest(loginFixture, "HOLA", "2");
-  await cardPage.storeCard();
-});
-test("archivar una card 3", async ({ loginFixture }) => {
-  const { cardPage } = await setupCardTest(loginFixture, "HOLA", "PARA PRUEBA");
-  await cardPage.storeCard();
-});
+// test("archivar una card 1", async ({ loginFixture }) => {
+//   const { cardPage } = await setupCardTest(loginFixture, "Tarjeta de prueba", "2");
+//   await cardPage.storeCard();
+// });
+for (const card of CARDS) {
+  test(`Archivar card: "${card.nameCard}" en lista "${card.nameList}"`, async ({ loginFixture }) => {
+    const { cardPage } = await setupCardTest(loginFixture, card.nameCard, card.nameList);
+    await cardPage.storeCard();
+  });
+}
+//este es la mejora del anterior test case CREAR ETIQUETAS aun esta en pruebas-------------------------------
+for (const label of LABELS) {
+  test.describe(`Etiqueta tipo: ${label.tipeLabel}`, () => {
 
+    test.beforeEach(async ({ loginFixture }) => {
+      if (label.failed) test.fail(); // 👈 aquí marcamos que este test se espera que falle
+    });
+
+    test(`Crear etiqueta de tipo: "${label.tipeLabel}"`, async ({ loginFixture }) => {
+      const { page, cardPage } = await setupCardTest(loginFixture);
+      await cardPage.cardActionAddLabel({ color: label.colorLabel, title: label.nameLabel });
+      await cardPage.closeDialogCard();
+
+      const appliedLabel = page
+        .locator(`[data-testid="compact-card-label"][aria-label="Color: ${label.confirmColorLabel}, título: “${label.nameLabel}”"]`)
+        .first();
+      await expect(appliedLabel).toBeVisible();
+    });
+  });
+}
+*/
