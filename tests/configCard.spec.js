@@ -1,7 +1,5 @@
 import { test, expect } from "../utils/fixtures.js";
-const { TrelloCard } = require('../components/card.component.js');
 import { CardPage } from "../pages/cardPage.js";
-
 
 test("editar etiquetas de una card", async ({ loginFixture }) => {
   const page = loginFixture;
@@ -11,11 +9,14 @@ test("editar etiquetas de una card", async ({ loginFixture }) => {
   await cardPage.editCard("HOLA", "PARA PRUEBA");
   await cardPage.cardActionEditLabels({ color: "verde" });
   await cardPage.cardActionEditLabels({ color: "verde", title: "PERO" });
-  await cardPage.cardActionEditLabels({ color: "rojo" });
-  await cardPage.cardActionEditLabels({ color: "amarillo" });
   await cardPage.closeDialogCard()
-  await page.waitForTimeout(4000);
+  //confirmación del test
+  const titleField = page.getByTestId('quick-card-editor-card-title');
+  await expect(titleField).toHaveValue('HOLA');
+  const appliedLabel = page.locator('[data-testid="compact-card-label"][aria-label="Color: verde, título: “PERO”"]').first();
+  await expect(appliedLabel).toBeVisible();
 });
+
 
 test("crear etiquetas para una card", async ({ loginFixture }) => {
   const page = loginFixture;
@@ -25,7 +26,10 @@ test("crear etiquetas para una card", async ({ loginFixture }) => {
   await cardPage.editCard("HOLA", "PARA PRUEBA");
   await cardPage.cardActionAddLabel({ color: "red", title: "insertnombre" });
   await cardPage.closeDialogCard()
+  const appliedLabel = page.locator('[data-testid="compact-card-label"][aria-label="Color: rojo, título: “insertnombre”"]').first();
+  await expect(appliedLabel).toBeVisible()
 });
+
 
 //crear etiqueta vacia y sin color (no deberia dejar)
 //crear una etiqueta ya existente (mismo texto mismo color)
@@ -39,9 +43,9 @@ test("opcion de daltonicos para etiquetas para una card", async ({ loginFixture 
   await cardPage.editCard("HOLA", "PARA PRUEBA");
   await cardPage.cardActionColorBlindMode()
   await cardPage.closeDialogCard()
+  const trelloRoot = page.locator('#trello-root');
+  await expect(trelloRoot).toHaveClass(/body-color-blind-mode-enabled/, { timeout: 5000 });
 });
-
-
 
 test("editar miembros de una card", async ({ loginFixture }) => {
   const page = loginFixture;
@@ -49,8 +53,10 @@ test("editar miembros de una card", async ({ loginFixture }) => {
   await page.waitForTimeout(4000);
   await cardPage.gotoCardPage()
   await cardPage.editCard("HOLA", "PARA PRUEBA");
-  await cardPage.cardActionEditMembers("Marcelo Ortuño Carreño")
+  await cardPage.cardActionEditMembers("Lecrere Consorcio")
   await cardPage.closeDialogCard()
+  const appliedLabel = page.locator('[data-testid="card-front-member"][aria-label="Lecrere Consorcio (consorciolecrere)"]').first();
+  await expect(appliedLabel).toBeVisible()
 });
 
 test("archivar una card", async ({ loginFixture }) => {
@@ -70,6 +76,11 @@ test("añadir recordatorio a una card", async ({ loginFixture }) => {
   await cardPage.editCard("HOLA", "PARA PRUEBA");
   await cardPage.cardActionEditReminder('15 minutos antes')
   await cardPage.cardActionEditReminder('1 hora antes')
+  
+  const appliedLabel = page.locator('[data-testid="badge-due-date-not-completed"]').first();
+  //data-testid="badge-due-date-not-completed"
+  await expect(appliedLabel).toBeVisible()
+
 });
 //añadir recordatorio a una card vencida
 //añadir recordatorio a una card sin fehca de vencimineto
@@ -81,6 +92,8 @@ test("editar fechas de vencimiento de una card", async ({ loginFixture }) => {
   await cardPage.gotoCardPage()
   await cardPage.editCard("HOLA", "PARA PRUEBA");
   await cardPage.cardActionEditDates('10/10/2025','11/11/2025');
+  const fechaSpan = page.locator('[data-testid="badge-due-date-not-completed"] span.nGT0DJOrI676qn');
+  await expect(fechaSpan).toHaveText(/10 oct - 11 nov/);
 });
 //añadir fecha inicio mayor a fecha final
 //añadir fecha final anterior

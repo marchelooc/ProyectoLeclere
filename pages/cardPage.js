@@ -43,7 +43,7 @@ export class CardPage {
   }
 
   async gotoCardPage() {
-    await this.page.goto('https://trello.com/b/OByrjFgx/tablerotest');
+    await this.page.goto('https://trello.com/b/258PQeEc/chelopruebas');
   }
 
   async addCardEnpi(text) {

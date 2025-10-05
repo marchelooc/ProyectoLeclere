@@ -39,4 +39,8 @@ export class BoardPage {
     await expect(this.page).toHaveURL("https://trello.com/");
   }
   
+  async EntrarTableroMOC(){
+  }
+
+  
 }
