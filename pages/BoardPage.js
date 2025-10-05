@@ -38,4 +38,19 @@ export class BoardPage {
     // validar que vuelves al home de Trello
     await expect(this.page).toHaveURL("https://trello.com/");
   }
+
+  async searchForBoard(term) {
+        // Esperar 2 segundos para que la página cargue
+        await this.page.waitForTimeout(1000);
+        // Asegurarse de que el campo de búsqueda sea visible antes de interactuar
+        await this.page.waitForSelector(this.searchInput, { state: 'visible' });
+        // Verificar si el campo de búsqueda está habilitado antes de escribir
+        await expect(this.page.locator(this.searchInput)).toBeEnabled();
+        // Escribir el término en el campo de búsqueda
+        await this.page.fill(this.searchInput, term);
+        // Esperar que las opciones aparezcan después de escribir
+        await this.page.waitForTimeout(1000); // Esperar un segundo para ver los resultados de búsqueda
+        
+  }
+
 }
