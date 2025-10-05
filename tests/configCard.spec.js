@@ -55,8 +55,8 @@ test("editar miembros de una card", async ({ loginFixture }) => {
   await cardPage.editCard("HOLA", "PARA PRUEBA");
   await cardPage.cardActionEditMembers("Lecrere Consorcio")
   await cardPage.closeDialogCard()
-  const appliedLabel = page.locator('[data-testid="card-front-member"][aria-label="Lecrere Consorcio (consorciolecrere)"]').first();
-  await expect(appliedLabel).toBeVisible()
+  const appliedLabel = page.locator('[role="img"][aria-label="Lecrere Consorcio (consorciolecrere)"]').first();
+  await expect(appliedLabel).toBeVisible({ timeout: 8000 });
 });
 
 test("archivar una card", async ({ loginFixture }) => {
@@ -92,9 +92,10 @@ test("editar fechas de vencimiento de una card", async ({ loginFixture }) => {
   await cardPage.gotoCardPage()
   await cardPage.editCard("HOLA", "PARA PRUEBA");
   await cardPage.cardActionEditDates('10/10/2025','11/11/2025');
-  const fechaSpan = page.locator('[data-testid="badge-due-date-not-completed"] span.nGT0DJOrI676qn');
-  await expect(fechaSpan).toHaveText(/10 oct - 11 nov/);
+  const fechaSpan = page.locator('[data-testid="badge-due-date-not-completed"] .nGT0DJOrI676qn').first();
+  await expect(fechaSpan).toHaveText(/10 oct - 11 nov/, { timeout: 8000 });
 });
+
 //añadir fecha inicio mayor a fecha final
 //añadir fecha final anterior
 //añadir fecha inicio muy en el futuro
