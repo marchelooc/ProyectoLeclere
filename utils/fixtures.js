@@ -1,6 +1,7 @@
 // fixtures/fixtures.js
 import { test as base } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage.js";
+import { BoardPage } from "../pages/BoardPage.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -8,15 +9,20 @@ dotenv.config();
 export const test = base.extend({
   loginFixture: async ({ page }, use) => {
     const loginPage = new LoginPage(page);
-
-    // ir al login
     await loginPage.gotoLogin();
-
-    // loguearse con credenciales de .env
-    await loginPage.login(process.env.TRELLO_EMAIL, process.env.TRELLO_PASSWORD);
-
-    // entregar la página ya logueada al test
+    await loginPage.login(
+      process.env.TRELLO_EMAIL,
+      process.env.TRELLO_PASSWORD
+    );
+    await page.waitForURL('https://trello.com/u/sergiobrayansoliznogales/boards', { timeout: 15000 });
+    await page.waitForSelector('[data-testid="create-board-tile"]', { timeout: 10000 });
     await use(page);
+  },
+  createFixture: async ({ loginFixture }, use, testInfo) => {
+    testInfo.setTimeout(60000);
+    const boardPage = new BoardPage(loginFixture);
+    await boardPage.createBoard();
+    await use(loginFixture);
   },
 });
 
