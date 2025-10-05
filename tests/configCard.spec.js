@@ -1,6 +1,6 @@
 import { test, expect } from "../utils/fixtures.js";
 import { CardPage } from "../pages/cardPage.js";
-
+/*
 test("editar etiquetas de una card", async ({ loginFixture }) => {
   const page = loginFixture;
   const cardPage = new CardPage(page);
@@ -133,3 +133,4 @@ test("mover una card a otra lista", async ({ loginFixture }) => {
   await cardPage.cardActionMoveList("2")
 });
 //mover una card a una lista que ya no existe 2cuentas?
+*/

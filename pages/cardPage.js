@@ -58,6 +58,7 @@ export class CardPage {
     await addCardBtn.click();
     await this.page.fill(this.addCardText, text);
     await this.page.click(this.addCardConfirmBtn);
+    await this.page.click('body', { position: { x: 0, y: 0 } });
   }
 
   async cardActionEditLabels({ color = null, title = null }) {
