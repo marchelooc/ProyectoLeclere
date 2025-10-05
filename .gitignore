@@ -8,4 +8,7 @@ node_modules/
 /playwright/.auth/
 package.json
 package-lock.json
+allure-report/
+allure-results/
 .env
+

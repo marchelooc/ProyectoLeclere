@@ -1,0 +1,15 @@
+{
+  "invalidEmail": {
+    "email": "hola@onda"
+  },
+  "invalidPassword": {
+    "email": "tu_correo_real@test.com",
+    "password": "wrongpass123"
+  },
+  "newUser": {
+    "email": "nuevo_user@test.com"
+  },
+  "emailWhitoutArroba": {
+    "email": "queonda.com"
+  }
+}
