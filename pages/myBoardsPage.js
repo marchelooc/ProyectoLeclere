@@ -15,13 +15,11 @@ export class MyBoardsPage {
     }
 
     async clickTabLink() {
-        const tab = this.page.locator(this.tabLink);
-        await tab.click();
+        await this.page.click(this.tabLink);
     }
 
     async clickClosedBoardsButton() {
-        const button = this.page.locator(this.closedBoardsButton);
-        await button.click();
+        await this.page.click(this.closedBoardsButton);
     }
 
     async verifyClosedBoardsVisible() {

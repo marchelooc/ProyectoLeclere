@@ -4,7 +4,7 @@ import { MainBoardPage } from "../../pages/mainBoardPage.js";
 import { AdvancedSearchPage } from "../../pages/advancedSearchPage.js";
 import { Logger } from "../../utils/helpers.js";
 
-test('Verificar que el filtro de busqueda sea visible', async ({ loginFixture }) => {
+test("Verificar que el filtro de busqueda sea visible", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -15,7 +15,7 @@ test('Verificar que el filtro de busqueda sea visible', async ({ loginFixture })
     await searchInput.waitFor({ state: 'visible', timeout: 10000 });
     await expect(searchInput).toBeVisible();
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(FiltroEsVisible)});
+    await page.screenshot({ path: screenshotPath("Verificar que el filtro de busqueda sea visible")});
     throw err;
     Logger.error(err);
     }
@@ -37,67 +37,64 @@ test("Verificar la busqueda con el campo vacio", async ({ loginFixture }) => {
     Logger.info("Verificar que el filtro de busqueda no tenga texto");
     await expect(searchInput).toHaveValue("");
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(BusquedaVacia)});
+    await page.screenshot({ path: screenshotPath("Verificar la busqueda con el campo vacio")});
     throw err;
     Logger.error(err);
     }
 });
 
-test('Verificar mensaje al escribir numeros en el campo de busqueda', async ({ loginFixture }) => {
+test("Verificar mensaje al escribir numeros en el campo de busqueda", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
     try {
     Logger.info("LLenar con numeros el filtro de busqueda");    
     await mainBoardPage.typeInSearch("123456790");
-    await page.waitForTimeout(2000);
     Logger.info("Verificar que el mensaje resultante de la busqueda sea visible");
     const message = page.locator('text=We couldn\'t find anything matching your search.');
     await expect(message).toBeVisible();
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(BusquedaDeNumeros)});
+    await page.screenshot({ path: screenshotPath("Verificar mensaje al escribir numeros en el campo de busqueda")});
     throw err;
     Logger.error(err);
     }
 });
 
-test('Verificar mensaje al escribir caracteres especiales en el campo de búsqueda', async ({ loginFixture }) => {
+test("Verificar mensaje al escribir caracteres especiales en el campo de busqueda", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
     try {
     Logger.info("LLenar el filtro de busqueda con caracteres especiales"); 
     await mainBoardPage.typeInSearch("@#$%%^!^><**@");
-    await page.waitForTimeout(2000);
     Logger.info("Verificar que el mensaje resultante de la busqueda sea visible");
     const message = page.locator('text=We couldn\'t find anything matching your search.');
     await expect(message).toBeVisible();
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(BusquedaDeCaracteresEspeciales)});
+    await page.screenshot({ path: screenshotPath("Verificar mensaje al escribir caracteres especiales en el campo de busqueda")});
     throw err;
     Logger.error(err);
     }
 });
 
-test('Verificar mensaje al escribir una palabra no existente en el campo de búsqueda', async ({ loginFixture }) => {
+test("Verificar mensaje al escribir una palabra no existente en el campo de busqueda", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
     try {
     Logger.info("Escribir en el filtro de busqueda una palabra no existente");
     await mainBoardPage.typeInSearch("Otorrinolaringologo");
-    await page.waitForTimeout(2000);
     Logger.info("Verificar que el mensaje resultante de la busqueda sea visible");
     const message = page.locator('text=We couldn\'t find anything matching your search.');
     await expect(message).toBeVisible();
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(BusquedaDePalabraNoExistente)});
+    await page.screenshot({ path: screenshotPath("Verificar mensaje al escribir una palabra no existente en el campo de busqueda")});
     throw err;
     Logger.error(err);
     }
 });
 
-test('Verificar mensaje al escribir una cadena de 100 caracteres en el campo de búsqueda', async ({ loginFixture }) => {
+test("Verificar mensaje al escribir una cadena de 100 caracteres en el campo de busqueda", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -105,12 +102,11 @@ test('Verificar mensaje al escribir una cadena de 100 caracteres en el campo de 
     Logger.info("Escribir en el filtro de busqueda una cadena de 100 caracteres");
     const longText = 'A'.repeat(100);
     await mainBoardPage.typeInSearch(longText);
-    await page.waitForTimeout(2000);
     Logger.info("Verificar que el mensaje resultante de la busqueda sea visible");
     const message = page.locator('text=We couldn\'t find anything matching your search.');
     await expect(message).toBeVisible();
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(BusquedaDeCadenaDe100Caracteres)});
+    await page.screenshot({ path: screenshotPath("Verificar mensaje al escribir una cadena de 100 caracteres en el campo de busqueda")});
     throw err;
     Logger.error(err);
     }
@@ -123,7 +119,6 @@ test("Redirigir a la página de 'Búsqueda avanzada' en Trello", async ({ loginF
     try {
     Logger.info("Dejar el filtro de busqueda en blanco");   
     await mainBoardPage.typeInSearch("");
-    await page.waitForTimeout(300);
     Logger.info("Ver que se muestre en la pantalla el texto de busqueda avanzada");
     const advancedSearchOption = page.locator('text="Advanced search"');
     await expect(advancedSearchOption).toBeVisible();
@@ -132,7 +127,7 @@ test("Redirigir a la página de 'Búsqueda avanzada' en Trello", async ({ loginF
     Logger.info("Verificar que se redirija a la pagina de busqueda avanzada");
     await expect(page).toHaveURL(/.*search/);
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(IrABusquedaAvanzada)});
+    await page.screenshot({ path: screenshotPath("Redirigir a la página de 'Búsqueda avanzada' en Trello")});
     throw err;
     Logger.error(err);
     }
@@ -146,7 +141,6 @@ test("Realizar una búsqueda avanzada con filtros", async ({ loginFixture }) => 
     try {
     Logger.info("Escribir en el filtro de busqueda");   
     await mainBoardPage.typeInSearch("TAB");
-    await page.waitForTimeout(300);
     Logger.info("Ver que se muestre en la pantalla el texto de busqueda avanzada");
     const advancedSearchOption = page.locator('text="Advanced search"');
     await expect(advancedSearchOption).toBeVisible();
@@ -154,41 +148,37 @@ test("Realizar una búsqueda avanzada con filtros", async ({ loginFixture }) => 
     await advancedSearchOption.click();
     Logger.info("Verificar que se redirija a la pagina de busqueda avanzada");
     await expect(page).toHaveURL(/.*search/);
-    await page.waitForTimeout(500);
     Logger.info("Escribir en el filtro de busqueda avanzada");
     await advancedSearchPage.typeInSearch("TABLERO");
-    await page.waitForTimeout(300);
     Logger.info("Seleccionar el filtro de ultima actualizacion");
     await advancedSearchPage.clickCardResultsButton();
     Logger.info("Seleccionar el filtro de ultima semana");
     await advancedSearchPage.clickLastWeekButton();
-    await page.waitForTimeout(300);
     Logger.info("Seleccionar la primera opcion de los resultados de busqueda");
     await advancedSearchPage.clickTrelloBasicsLink();
     Logger.info("Verificar que se redirija al tablero seleccionado");
     await expect(page).toHaveURL(/.*trello/);
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(BusquedaAvanzadaConFiltros)});
+    await page.screenshot({ path: screenshotPath("Realizar una búsqueda avanzada con filtros")});
     throw err;
     Logger.error(err);
     }
 });
 
-test('Seleccionar "TABLERO DE PRUEBA" desde el dropdown', async ({ loginFixture }) => {
+test("Seleccionar 'TABLERO DE PRUEBA' desde las sugerencias", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
     try {
     Logger.info("Escribir en el filtro de busqueda"); 
     await mainBoardPage.typeInSearch("TABLERO");
-    await page.waitForTimeout(500);
     Logger.info("Seleccionar la opcion de TABLERO DE PRUEBA");
     await mainBoardPage.selectSuggestionByText("TABLERO DE PRUEBA");
     Logger.info("Verificar que se redirija al tablero seleccionado");
     await expect(page).toHaveURL(/trello\.com\/b\//, { timeout: 15000 });
     await expect(page.getByText("TABLERO DE PRUEBA")).toBeVisible();
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(SeleccionarTablero)});
+    await page.screenshot({ path: screenshotPath("Seleccionar 'TABLERO DE PRUEBA' desde las sugerencias")});
     throw err;
     Logger.error(err);
     }

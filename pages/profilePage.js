@@ -33,9 +33,7 @@ export class ProfilePage {
         }
 
         async clickSaveChangesButton() {
-                const button = this.page.locator(this.saveChangesButton);
-                await button.waitFor({ state: "visible", timeout: 5000 }); 
-                await button.click();
+                await this.page.click(this.saveChangesButton);
         }
 
         async isAlertMessageVisible() {

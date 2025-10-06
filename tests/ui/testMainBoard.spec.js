@@ -6,6 +6,9 @@ import { MembersPage } from "../../pages/membersPage.js";
 import { TemplatesPage } from "../../pages/templatesPage.js";
 import { SettingsPage } from "../../pages/settingsPage.js";
 import { Logger } from "../../utils/helpers.js";
+import { ToolsTableroPage } from "../../pages/toolsTablero.js";
+import { BoardPage } from "../../pages/boardPage.js";
+
 
 test("Verificar que la ventana del Main Board es visible", async ({ loginFixture }) => {
     const page = loginFixture;
@@ -15,9 +18,8 @@ test("Verificar que la ventana del Main Board es visible", async ({ loginFixture
     Logger.info("Verificar que la ventana del Main Board es visible");
     await mainBoardPage.isPageVisible();
     await expect(page).toHaveURL(/trello\.com/);
-    await page.waitForTimeout(1000);
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(VentanaMainVisible)});
+    await page.screenshot({ path: screenshotPath("Verificar que la ventana del Main Board es visible")});
     throw err;
     Logger.error(err);
     }
@@ -35,7 +37,7 @@ test("Seleccionar la primera opción de 'Recently viewed'", async ({ loginFixtur
     Logger.info("Verificar que se redirija al tablero seleccionado");
     await expect(page).toHaveURL(/.*b/);
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(SeleccionarTableroDeRecentlyViewed)});
+    await page.screenshot({ path: screenshotPath("Seleccionar la primera opción de 'Recently viewed'")});
     throw err;
     Logger.error(err);
     }
@@ -53,7 +55,6 @@ test("Hacer clic en el botón 'Tableros' y acceder a un tablero", async ({ login
     await mainBoardPage.clickBoardsButton();
     Logger.info("Verificar que se redirija a la pagina de tableros");
     await expect(page).toHaveURL(/.*w/);
-    await page.waitForTimeout(1000);
     Logger.info("Verificar que la pagina de tableros es visible");
     await myBoardsPage.isPageVisible();
     Logger.info("Hacer clic en la primera opcion de tableros");
@@ -61,7 +62,7 @@ test("Hacer clic en el botón 'Tableros' y acceder a un tablero", async ({ login
     Logger.info("Verificar que se redirija al tablero seleccionado");
     await expect(page).toHaveURL(/.*b/);
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(IrATablerosYElegirUno)});
+    await page.screenshot({ path: screenshotPath("Hacer clic en el botón 'Tableros' y acceder a un tablero")});
     throw err;
     Logger.error(err);
     }
@@ -79,7 +80,6 @@ test("Hacer clic en 'Ver los tableros cerrados'", async ({ loginFixture }) => {
     await mainBoardPage.clickBoardsButton();
     Logger.info("Verificar que se redirija a la pagina de tableros");
     await expect(page).toHaveURL(/.*w/);
-    await page.waitForTimeout(1000);
     Logger.info("Verificar que la pagina de tableros es visible");
     await myBoardsPage.isPageVisible();
     Logger.info("Hacer clic en el boton 'Ver los tableros cerrados'");
@@ -87,7 +87,7 @@ test("Hacer clic en 'Ver los tableros cerrados'", async ({ loginFixture }) => {
     Logger.info("Verificar que se muestren lostableros cerrados");
     await myBoardsPage.verifyClosedBoardsVisible();
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(BotonTablerosCerrados)});
+    await page.screenshot({ path: screenshotPath("Hacer clic en 'Ver los tableros cerrados'")});
     throw err;
     Logger.error(err);
     }
@@ -105,7 +105,7 @@ test("Hacer clic en la seccion de Inicio", async ({ loginFixture }) => {
     Logger.info("Verificar que se redirija a la pagina de home");
     await expect(page).toHaveURL(/.trello/);
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(SeccionInicio)});
+    await page.screenshot({ path: screenshotPath("Hacer clic en la seccion de Inicio")});
     throw err;
     Logger.error(err);
     }
@@ -135,11 +135,12 @@ test("Verificar la funcionalidad de agregar miembros al workspace", async ({ log
     Logger.info("Hacer clic en el boton de eliminar miembro");
     await membersPage.performTeardownActionsT15();
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(AgregarMiembros)});
+    await page.screenshot({ path: screenshotPath("Verificar la funcionalidad de agregar miembros al workspace")});
     throw err;
     Logger.error(err);
     }
 });
+
 
 test("Crear un board usando el template de marketing", async ({ loginFixture }) => {
     const page = loginFixture;
@@ -157,21 +158,19 @@ test("Crear un board usando el template de marketing", async ({ loginFixture }) 
     await templatesPage.clickMarketingLink();
     Logger.info("Hacer clic en el primer tablero de marketing");
     await templatesPage.clickTextLink();
-    await page.waitForTimeout(1000);
     Logger.info("Hacer clic en el boton de usar template");
     await templatesPage.clickUseButton();
-    await page.waitForTimeout(1000);
     Logger.info("Hacer clic en el espacio para poner titulo al tablero");
-    await templatesPage.typeRandomTextInBoardTitle();
-    await page.waitForTimeout(1000);
+    const tittle = await templatesPage.typeRandomTextInBoardTitle();
     Logger.info("Hacer clic en el boton de crear");
     await templatesPage.clickCreateButton();
-    await page.waitForTimeout(1000);
-    Logger.info("Verificar que se redirija al tablero creado");
-    await expect(page).toHaveURL(/.*b/);
-    await page.waitForTimeout(1000); //falta tierdown
+    const tablero = new ToolsTableroPage(page);
+    await tablero.abrirMenu("Close board");
+    const boardPage = new BoardPage(page);
+    await boardPage.gotoHome()
+    await boardPage.delete(tittle)
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(CrearTableroUsandoTemplate)});
+    await page.screenshot({ path: screenshotPath("Crear un board usando el template de marketing")});
     throw err;
     Logger.error(err);
     }
@@ -195,7 +194,6 @@ test("Cambiar la visibilidad del Workspace", async ({ loginFixture }) => {
     await settingsPage.clickVisibilityPublicOption();
     Logger.info("Hacer clic en el boton de cerrar popover");
     await settingsPage.clickClosePopoverButton();
-    await page.waitForTimeout(2000);
     Logger.info("Verificar que el texto de visibilidad de workspace sea visible");
     await settingsPage.isPrivateWorkspaceTextVisible();
     Logger.info("Hacer clic en el boton de cambiar visibilidad");
@@ -206,9 +204,8 @@ test("Cambiar la visibilidad del Workspace", async ({ loginFixture }) => {
     await settingsPage.clickClosePopoverButton();
     Logger.info("Verificar que el texto de visibilidad de workspace sea visible");
     await settingsPage.isPrivateWorkspaceTextVisible();
-    await page.waitForTimeout(2000);
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(CambiarVisibilidad)});
+    await page.screenshot({ path: screenshotPath("Cambiar la visibilidad del Workspace")});
     throw err;
     Logger.error(err);
     }

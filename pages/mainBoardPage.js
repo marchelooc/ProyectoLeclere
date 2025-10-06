@@ -3,12 +3,12 @@ export class MainBoardPage {
         constructor(page) {
                 this.page = page;
                 this.searchInput = 'input:is([placeholder="Buscar"], [placeholder="Search"])';
-                this.searchDialog = '[data-test-id="search-dialog"], [data-testid="search-dialog"], div[role="listbox"], div[role="dialog"]'; // Dropdown de búsqueda
+                this.searchDialog = 'div[class="AwzOoLt0EyQ5H8"]';//'[data-test-id="search-dialog"], [data-testid="search-dialog"], div[role="listbox"], div[role="dialog"]'; // Dropdown de búsqueda
                 this.firstWorkspace = 'xpath=//*[@id="content"]/div/div/div/main/div/div[2]/div[1]/div[2]/div[1]/a/div/div[1]/div';
-                this.boardsButton = 'xpath=//*[@id="content"]/div/div/div/main/div/div[2]/div[2]/div/div[1]/div/a[1]';
-                this.membersButton = 'xpath=//*[@id="content"]/div/div/div/main/div/div[2]/div[2]/div/div[1]/div/a[2]';
-                this.settingsButton = 'xpath=//*[@id="content"]/div/div/div/main/div/div[2]/div[2]/div/div[1]/div/a[3]';
-                this.templateButton = 'xpath=//*[@id="content"]/div/div/div/nav/header/div/ul/li[2]/a';
+                this.boardsButton = 'xpath=//*[@id="content"]/div/div/div/main/div/div[2]/div[3]/div/div[1]/div/a[1]';
+                this.membersButton = 'xpath=//*[@id="content"]/div/div/div/main/div/div[2]/div[3]/div/div[1]/div/a[2]';
+                this.settingsButton = 'xpath=//*[@id="content"]/div/div/div/main/div/div[2]/div[3]/div/div[1]/div/a[3]';
+                this.templateButton = 'li[data-testid="templates"]'; 
                 this.homeButton = 'xpath=//*[@id="content"]/div/div/div/nav/header/div/ul/li[3]/a';
                 this.profileMenuButton = 'xpath=//*[@id="header"]/div[3]/div[4]/button';
                 this.themeSwitcherButton = 'xpath=//*[@id="account-menu-popover-content"]/div[2]/ul/li[5]/button';
@@ -22,7 +22,7 @@ export class MainBoardPage {
         }
         
         async isPageVisible() {
-                await this.page.waitForTimeout(8000);
+                await this.page.waitForTimeout(2000);
                 await expect(this.page.locator('text=YOUR WORKSPACES')).toBeVisible(); 
         }
 
@@ -48,69 +48,47 @@ export class MainBoardPage {
         }
 
         async clickFirstWorkspace() {
-                const firstWorkspace = this.page.locator(this.firstWorkspace);
-                await firstWorkspace.waitFor({ state: "visible", timeout: 5000 }); 
-                await firstWorkspace.click(); 
+                await this.page.click(this.firstWorkspace);
         }
 
         async clickBoardsButton() {
-                const button = this.page.locator(this.boardsButton);
-                await button.waitFor({ state: "visible", timeout: 5000 }); 
-                await button.click();
+                await this.page.click(this.boardsButton);
         }
 
         async clickMembersButton() {
-                const button = this.page.locator(this.membersButton);
-                await button.waitFor({ state: "visible", timeout: 5000 });
-                await button.click();
+                await this.page.click(this.membersButton);
         }
 
         async clickSettingsButton() {
-                const button = this.page.locator(this.settingsButton);
-                await button.waitFor({ state: "visible", timeout: 5000 });
-                await button.click();
+                await this.page.click(this.settingsButton);
         }
 
         async clickTemplateButton() {
-                const button = this.page.locator(this.templateButton);
-                await button.waitFor({ state: "visible", timeout: 5000 });
-                await button.click();
+                await this.page.click(this.templateButton);
         }
 
         async clickHomeButton() {
-                const button = this.page.locator(this.homeButton);
-                await button.waitFor({ state: "visible", timeout: 5000 });
-                await button.click();
+                await this.page.click(this.homeButton);
         }
 
         async clickProfileMenuButton() {
-                const button = this.page.locator(this.profileMenuButton);
-                await button.waitFor({ state: "visible", timeout: 5000 });
-                await button.click();
+                await this.page.click(this.profileMenuButton);
         }
 
         async clickThemeSwitcherButton() {
-                const button = this.page.locator(this.themeSwitcherButton);
-                await button.waitFor({ state: "visible", timeout: 5000 });
-                await button.click();
+                await this.page.click(this.themeSwitcherButton);
         }
 
         async clickDarkThemeButton() {
-                const button = this.page.locator(this.darkThemeButton);
-                await button.waitFor({ state: "visible", timeout: 5000 });
-                await button.click();
+                await this.page.click(this.darkThemeButton);
         }
 
         async clickMatchSystemThemeButton() {
-                const button = this.page.locator(this.matchSystemThemeButton);
-                await button.waitFor({ state: "visible", timeout: 5000 });
-                await button.click();
+                await this.page.click(this.matchSystemThemeButton);
         }
 
         async clickProfileAndVisibilityButton() {
-                const button = this.page.locator(this.profileAndVisibilityButton);
-                await button.waitFor({ state: "visible", timeout: 5000 });
-                await button.click();
+                await this.page.click(this.profileAndVisibilityButton);
         }
 
         async clickActivityButton() {
@@ -130,9 +108,7 @@ export class MainBoardPage {
         }
 
         async clickSettingsProfileButton() {
-                const button = this.page.locator(this.settingsProfileButton);
-                await button.waitFor({ state: "visible", timeout: 5000 });
-                await button.click();
+                await this.page.click(this.settingsProfileButton);
         }
 
         async clickShortcutsButton() {

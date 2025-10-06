@@ -25,32 +25,26 @@ export class AdvancedSearchPage {
     }
 
     async clickCardResultsButton() {
-        const button = this.page.locator(this.cardResultsButton);
-        await button.click(); 
+        await this.page.click(this.cardResultsButton); 
     }
 
     async clickLastWeekButton() {
-        const button = this.page.locator(this.lastWeekButton);
-        await button.click();
+        await this.page.click(this.lastWeekButton);
     }
 
     async clickCloseBoardsButton() {
-        const button = this.page.locator(this.closeBoardsButton);
-        await button.click(); 
+        await this.page.click(this.closeBoardsButton);
     }
 
     async clickStarredBoardsButton() {
-        const button = this.page.locator(this.starredBoardsButton);
-        await button.click(); 
+        await this.page.click(this.starredBoardsButton);
     }
 
     async clickCardDescriptionsButton() {
-        const button = this.page.locator(this.cardDescriptionsButton);
-        await button.click(); 
+        await this.page.click(this.cardDescriptionsButton);
     }
 
     async clickTrelloBasicsLink() {
-        const link = this.page.locator(this.trelloBasicsLink);
-        await link.click();
+        await this.page.click(this.trelloBasicsLink);
     }
 }

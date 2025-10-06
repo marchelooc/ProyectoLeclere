@@ -5,7 +5,7 @@ export class TemplatesPage {
         this.marketingLink = 'xpath=//*[@id="content"]/div/div/div/nav/header/div/ul/li[2]/ul/li[5]/a';
         this.textLink = 'xpath=//*[@id="content"]/div/div/div/main/div/div/div/div/div[2]/div[1]/a/div[3]/div[2]';
         this.useButton = 'button:has-text("Use template")';
-        this.boardTitleInput = '#boardNewTitle';
+        this.boardTitleInput = 'input[id="boardNewTitle"]';
         this.createButton = 'input.nch-button.nch-button--primary.js-submit[type="submit"][value="Create"]';
 
     }
@@ -15,33 +15,26 @@ export class TemplatesPage {
     }
 
     async clickMarketingLink() {
-        const link = this.page.locator(this.marketingLink);
-        await link.waitFor({ state: "visible", timeout: 5000 });
-        await link.click();
+        await this.page.click(this.marketingLink);
     }
 
     async clickTextLink() {
-        const element = this.page.locator(this.textLink);
-        await element.waitFor({ state: "visible", timeout: 5000 });
-        await element.click();
+        await this.page.click(this.textLink);
     }
 
     async clickUseButton() {
-        const button = this.page.locator(this.useButton);
-        await button.waitFor({ state: "visible", timeout: 5000 });
-        await button.click();
+        await this.page.click(this.useButton);
     }
 
     async typeRandomTextInBoardTitle() {
         const randomText = (Math.random().toString(36).substring(2, 7)).replace(/\d/g, '');  // Genera un texto aleatorio de 5 letras
         const inputField = this.page.locator(this.boardTitleInput);
-        await inputField.fill(randomText); //ramdomText
+        await inputField.fill(randomText);
+        return randomText;
     }
 
     async clickCreateButton() {
-        const button = this.page.locator(this.createButton);
-        await button.waitFor({ state: "visible", timeout: 5000 });
-        await button.click();
+        await this.page.click(this.createButton);
     }
 
 }

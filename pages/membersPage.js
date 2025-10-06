@@ -17,9 +17,7 @@ export class MembersPage {
     }
 
     async clickAddMembersButton() {
-        const button = this.page.locator(this.addMembersButton);
-        await button.waitFor({ state: "visible", timeout: 5000 });
-        await button.click();
+        await this.page.click(this.addMembersButton);
     }
 
     async typeEmailOrName(email) {
@@ -29,9 +27,7 @@ export class MembersPage {
     }
 
     async clickSendButton() {
-        const button = this.page.locator(this.sendButton);
-        await button.waitFor({ state: "visible", timeout: 5000 });
-        await button.click();
+        await this.page.click(this.sendButton);
     }
 
     async isMemberNameVisible() {
@@ -40,15 +36,11 @@ export class MembersPage {
     }
 
     async clickDeleteButton() {
-        const button = this.page.locator(this.deleteButton);
-        await button.waitFor({ state: "visible", timeout: 5000 });
-        await button.click();
+        await this.page.click(this.deleteButton);
     }
 
     async clickRemoveButton() {
-        const button = this.page.locator(this.removeButton);
-        await button.waitFor({ state: "visible", timeout: 5000 });
-        await button.click();
+        await this.page.click(this.removeButton);
     }
 
     async isAlertMessageVisible() {

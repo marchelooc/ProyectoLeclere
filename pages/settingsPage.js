@@ -15,21 +15,15 @@ export class SettingsPage {
     }
 
     async clickChangeVisibilityButton() {
-        const button = this.page.locator(this.changeVisibilityButton);
-        await button.waitFor({ state: "visible", timeout: 5000 });
-        await button.click();
+        await this.page.click(this.changeVisibilityButton);
     }
 
     async clickVisibilityPublicOption() {
-        const button = this.page.locator(this.visibilityPublicOption);
-        await button.waitFor({ state: "visible", timeout: 5000 });
-        await button.click();
+        await this.page.click(this.visibilityPublicOption);
     }
 
     async clickVisibilityPrivateOption() {
-        const button = this.page.locator(this.visibilityPrivateOption);
-        await button.waitFor({ state: "visible", timeout: 5000 });
-        await button.click();
+        await this.page.click(this.visibilityPrivateOption);
     }
 
     async isPrivateWorkspaceTextVisible() {
@@ -38,9 +32,7 @@ export class SettingsPage {
     }
 
     async clickClosePopoverButton() {
-        const button = this.page.locator(this.closePopoverButton);
-        await button.waitFor({ state: "visible", timeout: 5000 });
-        await button.click();
+        await this.page.click(this.closePopoverButton);
     }
         
 }
