@@ -17,7 +17,7 @@ export default defineConfig({
     },
   use: {
     baseURL: process.env.BASE_URL || 'https://trello.com/',
-    headless: process.env.HEADLESS !== 'true',
+    headless: process.env.HEADLESS !== 'false',
     trace: 'on-first-retry',
   },
   projects: [

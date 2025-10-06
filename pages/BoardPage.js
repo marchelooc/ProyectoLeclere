@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test";
-import { faker } from "@faker-js/faker";
+import { faker, th } from "@faker-js/faker";
+import { ADDRGETNETWORKPARAMS } from "dns";
 
 
 export class BoardPage {
@@ -13,13 +14,210 @@ export class BoardPage {
     this.createEmptyBoard = 'button[data-testid="header-create-board-button"]'
     this.boardTittle = 'input[data-testid="create-board-title-input"]'
     this.createSave = 'button[data-testid="create-board-submit-button"]'
+    this.colorOption = 'button[title="Dark blue gradient"]'
+    this.imageOption = 'button[title="Majestic mountain silhouetted against an orange sky."]'
+    this.visibilityDropDown = 'div[data-testid="create-board-select-visibility-select--control"]'
+    //this.privateOption =
+    //this.publicOption =
+    this.closeModalButton = 'button[class="JABNldlIncwKgc zrn4tJQdoA76rj"]'
+    this.templateButton = 'button[data-testid="create-from-template-button"]'
+    this.templateButton = 'button[data-testid="header-create-board-from-template-button"]'
+    this.template = 'div[style*="photo-1576502200916-3808e07386a5.jpg"]'
+    this.UnchekCard = 'label[data-testid="clickable-checkbox"]'
+    this.exploreTemplate = 'a[href="/templates"]'
+    this.home = 'a[aria-label="Back to home"]'
+
   }
 
-  async createBoard(){
+  async createBoard() {
     await this.page.click(this.createBoardButton)
     await this.page.click(this.createEmptyBoard)
     await this.page.fill(this.boardTittle, faker.lorem.words(2))
-     await this.page.click(this.createSave)
+    await this.page.click(this.createSave)
+  }
+
+  async verifyCreateBoard(tittle) {
+    await expect(this.page).toHaveTitle(new RegExp(tittle, 'i'));
+  }
+
+  async createBoardWithValidTitleAndDefaultBackground() {
+    await this.page.click(this.createBoardButton)
+    await this.page.click(this.createEmptyBoard)
+    const boardName = faker.lorem.words(2)
+    await this.page.fill(this.boardTittle, boardName)
+    await this.page.click(this.createSave)
+    return boardName
+  }
+
+  async createBoardWithSolidColorBackground() {
+    await this.page.click(this.createBoardButton)
+    await this.page.click(this.createEmptyBoard)
+    const boardName = faker.lorem.words(2)
+    await this.page.fill(this.boardTittle, boardName)
+    await this.page.click(this.colorOption)
+    await this.page.click(this.createSave)
+    return boardName
+
+  }
+
+  async createBoardWithImageBackground() {
+    await this.page.click(this.createBoardButton)
+    await this.page.click(this.createEmptyBoard)
+    const boardName = faker.lorem.words(2)
+    await this.page.fill(this.boardTittle, boardName)
+    await this.page.click(this.imageOption)
+    await this.page.click(this.createSave)
+    return boardName
+  }
+
+  async createBoardWithDefaultVisibility() {
+    await this.page.click(this.createBoardButton)
+    await this.page.click(this.createEmptyBoard)
+    const boardName = faker.lorem.words(2)
+    await this.page.fill(this.boardTittle, boardName)
+    await this.page.click(this.createSave)
+    return boardName
+  }
+
+  async redirectToTemplateGallery() {
+    await this.page.click(this.createBoardButton)
+    await this.page.click(this.createEmptyBoard)
+    await this.page.click(this.templateButton)
+  }
+
+  async closeModalWithoutCreatingBoard() {
+    await this.page.click(this.createBoardButton)
+    await this.page.click(this.createEmptyBoard)
+    await this.page.click(this.closeModalButton)
+  }
+
+  async createMultipleBoardsWithSameName() {
+    for (let i = 1; i <= 3; i++) {
+      await this.page.click(this.createBoardButton)
+      await this.page.click(this.createEmptyBoard)
+      await this.page.fill(this.boardTittle, "nombreRepetido")
+      await this.page.click(this.createSave)
+      await this.page.click(this.home)
+
+    }
+  }
+
+  async createBoardWithAlphanumericName() {
+    await this.page.click(this.createBoardButton)
+    await this.page.click(this.createEmptyBoard)
+    const boardName = faker.string.alphanumeric(10)
+    await this.page.fill(this.boardTittle, boardName)
+    await this.page.click(this.createSave)
+    return boardName
+  }
+
+  async createBoardWithNumericName() {
+    await this.page.click(this.createBoardButton)
+    await this.page.click(this.createEmptyBoard)
+    const boardName = faker.string.numeric(10)
+    await this.page.fill(this.boardTittle, boardName)
+    await this.page.click(this.createSave)
+    return boardName
+  }
+
+  async createBoardWithSpecialCharacters() {
+    await this.page.click(this.createBoardButton)
+    await this.page.click(this.createEmptyBoard)
+    const boardName = `${faker.word.sample()}${faker.string.fromCharacters('@$#%&*!·?', 3)}`;
+    await this.page.fill(this.boardTittle, boardName)
+    await this.page.click(this.createSave)
+    return boardName
+  }
+
+  async createBoardWithOnlySpecialCharacters() {
+    await this.page.click(this.createBoardButton);
+    await this.page.click(this.createEmptyBoard);
+    const boardName = faker.string.fromCharacters('@$#%&*!·?~^<>+=-', 8);
+    await this.page.fill(this.boardTittle, boardName);
+    await this.page.click(this.createSave);
+    return boardName
+  }
+
+  async createBoardWithLimitedCharacteres() {
+    await this.page.click(this.createBoardButton);
+    await this.page.click(this.createEmptyBoard);
+    const boardName = faker.string.alphanumeric(16384)
+    await this.page.fill(this.boardTittle, boardName);
+    await this.page.click(this.createSave);
+    return boardName
+  }
+
+  async createBoardWithNoLimitedCharacteres() {
+    await this.page.click(this.createBoardButton);
+    await this.page.pause()
+    await this.page.click(this.createEmptyBoard);
+    const boardName = faker.string.alphanumeric(16385)
+    await this.page.fill(this.boardTittle, boardName);
+    await this.page.click(this.createSave);
+    return boardName
+  }
+
+  async createBoardWithTemple() {
+    await this.page.click(this.createBoardButton);
+    await this.page.click(this.templateButton);
+    await this.page.click(this.template);
+    await this.page.click(this.createSave);
+  }
+
+  async createBoardChangingName() {
+    await this.page.click(this.createBoardButton);
+    await this.page.click(this.templateButton);
+    await this.page.click(this.template);
+    const boardName = faker.lorem.words(2);
+    await this.page.fill(this.boardTittle, boardName)
+    await this.page.click(this.createSave);
+    return boardName
+  }
+
+  async createBoardConserveCard(){
+    await this.page.click(this.createBoardButton);
+    await this.page.click(this.templateButton);
+    await this.page.click(this.template);
+    await this.page.click(this.UnchekCard);
+    await this.page.click(this.createSave);
+  }
+
+  async exploreTemplates(){
+    await this.page.pause()
+    await this.page.click(this.createBoardButton);
+    await this.page.click(this.templateButton);
+    await this.page.click(this.exploreTemplate);
+
+  }
+  
+  async changeAlphanumericNameFromTemplate(){
+    await this.page.click(this.createBoardButton);
+    await this.page.click(this.templateButton);
+    await this.page.click(this.template);
+    const boardName = faker.string.alphanumeric(10)
+    await this.page.fill(this.boardTittle, boardName)
+    await this.page.click(this.createSave);
+    return boardName
+  }
+
+  async changeNumericNameFromTemplate(){
+    await this.page.click(this.createBoardButton);
+    await this.page.click(this.templateButton);
+    await this.page.click(this.template);
+    const boardName = faker.string.numeric(10)
+    await this.page.fill(this.boardTittle, boardName)
+    await this.page.click(this.createSave);
+    return boardName
+  }
+
+  async changeSpecialCharacteresNameFromTemplate(){
+    await this.page.click(this.createBoardButton);
+    await this.page.click(this.templateButton);
+    await this.page.click(this.template);
+    const boardName = faker.string.fromCharacters('@$#%&*!·?~^<>+=-', 8);
+    await this.page.fill(this.boardTittle, boardName)
+    await this.page.click(this.createSave);
+    return boardName
   }
 
   async openProfileMenu() {

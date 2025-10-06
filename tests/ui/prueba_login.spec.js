@@ -1,7 +1,7 @@
 // tests/prueba_login.spec.js
-import { test, expect } from "../utils/fixtures.js";
-import { BoardPage } from "../pages/BoardPage.js";
-import { LogoutPage } from "../pages/LogoutPage.js";
+import { test, expect } from "../../utils/fixtures.js";
+import { BoardPage } from "../../pages/BoardPage.js";
+import { LogoutPage } from "../../pages/LogoutPage.js";
 
 test("Precondición: login exitoso", async ({ loginFixture }) => {
   const page = loginFixture;
