@@ -1,6 +1,6 @@
-import { test, expect } from "../../../utils/fixtures.js";
-import { BoardPage } from "../../../pages/BoardPage.js";
-import { LogoutPage } from "../../../pages/LogoutPage.js";
+import { test, expect } from "../../utils/fixtures.js";
+import { BoardPage } from "../../pages/BoardPage.js";
+import { LogoutPage } from "../../pages/LogoutPage.js";
 
 test("Verificar el cierre de sesion exitoso", async ({ loginFixture }) => {
   const page = loginFixture;

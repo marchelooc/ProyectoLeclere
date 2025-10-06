@@ -57,13 +57,13 @@ export class LoginPage {
     await this.page.click(this.continueButton);
   }
 
-  async enterEmptySpaces(emptySpaces) {
-    await this.page.fill(this.emailInput, emptySpaces);
+  async enterEmptySpaces(email) {
+    await this.page.fill(this.emailInput, email);
     await this.page.click(this.continueButton);
   }
 
-  async enterCharactesSpecial(characters) {
-    await this.page.fill(this.emailInput, characters);
+  async enterCharactesSpecial(email) {
+    await this.page.fill(this.emailInput, email);
     await this.page.click(this.continueButton);
   }
 

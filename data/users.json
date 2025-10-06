@@ -11,5 +11,11 @@
   },
   "emailWhitoutArroba": {
     "email": "queonda.com"
+  },
+  "characterEmail": {
+    "email": "#####$$$$$"
+  },
+  "emptyEmail": {
+    "email": "      "
   }
 }
