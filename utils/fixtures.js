@@ -16,6 +16,8 @@ export const test = base.extend({
     await loginPage.login(process.env.TRELLO_EMAIL, process.env.TRELLO_PASSWORD);
 
     // entregar la página ya logueada al test
+    await page.waitForURL('https://trello.com/u/consorciolecrere/boards', { timeout: 15000 });
+    await page.waitForSelector('[data-testid="create-board-tile"]', { timeout: 10000 });
     await use(page);
   },
 });
