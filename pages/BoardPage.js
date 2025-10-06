@@ -7,7 +7,7 @@ export class BoardPage {
     this.profileButton = "button[data-testid='header-member-menu-button']";
     this.popoverMenu = "#account-menu-popover-content";
     this.logoutButton = "button[data-testid='account-menu-logout']";
-    this.confirmLogoutButton = "button#logout-submit"; // Atlassian
+    this.confirmLogoutButton = "button#logout-submit"; 
     this.createBoardButton = 'button[data-testid="header-create-menu-button"]';
     this.createEmptyBoard = 'button[data-testid="header-create-board-button"]';
     this.boardTittle = 'input[data-testid="create-board-title-input"]';
