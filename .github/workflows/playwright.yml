@@ -2,9 +2,9 @@ name: Playwright Tests with Allure Report
 
 on:
   push:
-    branches: [main, marceloOrtuño]
+    branches: [main]
   pull_request:
-    branches: [main, marceloOrtuño]
+    branches: [main]
 
 jobs:
   test:
