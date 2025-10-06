@@ -7,7 +7,7 @@ import LABELS from "../../data/cardsLabel.json";
 async function setupCardTest(loginFixture, cardTitle = "HOLA", cardDesc = "PARA PRUEBA") {
   const page = loginFixture;
   const cardPage = new CardPage(page);
-  await page.waitForTimeout(4000); //cambiar en el fixture del kevin hija
+  await page.waitForTimeout(10000); //cambiar en el fixture del kevin hija
   await cardPage.gotoCardPage();
   await cardPage.editCard(cardTitle, cardDesc);
   return { page, cardPage };
@@ -16,7 +16,7 @@ async function setupCardTest(loginFixture, cardTitle = "HOLA", cardDesc = "PARA 
 test("Crear Card exitosamente", async ({ loginFixture }) => {
   const page = loginFixture;
   const cardPage = new CardPage(page);
-  await page.waitForTimeout(4000);
+  await page.waitForTimeout(10000);
   await cardPage.gotoCardPage()
   await cardPage.addCard("Tarjeta de prueba", "PARA PRUEBA");
   await cardPage.addCard("HOLA", "PARA PRUEBA");
