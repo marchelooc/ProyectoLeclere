@@ -52,15 +52,17 @@ export class CardPage {
     await this.page.click(this.addCardConfirmBtn);
   }
   
-  async addCard(text, lista) {
-  const list = this.page.getByTestId('list-wrapper').filter({ has: this.page.getByRole('heading', { name: lista }) });
-  const addCardBtn = list.getByTestId('list-add-card-button');
-    await addCardBtn.waitFor({ state: 'visible', timeout: 10000 });
-    await addCardBtn.click();
-    await this.page.fill(this.addCardText, text);
-    await this.page.click(this.addCardConfirmBtn);
-    await this.page.click('body', { position: { x: 0, y: 0 } });
-  }
+   async addCard(text, lista) {
+     const list = this.page.getByTestId('list-wrapper').filter({ has: this.page.getByRole('heading', { name: lista }) });
+     await list.waitFor({ state: 'visible', timeout: 15000 });
+     const addCardBtn = list.getByTestId('list-add-card-button');
+     await addCardBtn.waitFor({ state: 'visible', timeout: 10000 });
+     await addCardBtn.click();
+     await this.page.fill(this.addCardText, text);
+     await this.page.click(this.addCardConfirmBtn);
+     await this.page.click('body', { position: { x: 0, y: 0 } });
+   }
+
 
   async cardActionEditLabels({ color = null, title = null }) {
     const dialog = this.page.getByRole('dialog', { name: 'Etiquetas' });
