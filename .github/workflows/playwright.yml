@@ -33,7 +33,10 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
         env:
-            HEADLESS: "false"
+            BASE_URL= https://trello.com/
+            HEADLESS= false
+            TRELLO_EMAIL=consorciolecrere@gmail.com
+            TRELLO_PASSWORD=ConsorcioLecrere2025
 
       # generación del report allure
       - name: Generate Allure report

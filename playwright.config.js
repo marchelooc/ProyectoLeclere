@@ -21,10 +21,6 @@ export default defineConfig({
     headless: process.env.HEADLESS !== "true",
     trace: "on-first-retry",
     permissions: ['clipboard-read', 'clipboard-write'],
-    //para el actions?
-    actionTimeout: 15000,  // para cada acción individual
-    navigationTimeout: 30000, // para navegaciones lentas
-    viewport: { width: 1280, height: 720 },
   },
   projects: [
     {
