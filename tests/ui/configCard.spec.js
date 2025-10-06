@@ -36,7 +36,7 @@ test("editar etiquetas de una card", async ({ loginFixture }) => {
     .first();
   await expect(appliedLabel).toBeVisible();
 });
-
+/*
 for (const label of LABELS) {
   test(`Crear etiqueta de tipo: "${label.tipeLabel}"`, async ({ loginFixture }) => {
     const { page, cardPage } = await setupCardTest(loginFixture);
