@@ -1,7 +1,6 @@
 import { expect } from "@playwright/test";
 import { faker } from "@faker-js/faker";
 
-
 export class BoardPage {
   constructor(page) {
     this.page = page;
@@ -9,17 +8,19 @@ export class BoardPage {
     this.popoverMenu = "#account-menu-popover-content";
     this.logoutButton = "button[data-testid='account-menu-logout']";
     this.confirmLogoutButton = "button#logout-submit"; // Atlassian
-    this.createBoardButton = 'button[data-testid="header-create-menu-button"]'
-    this.createEmptyBoard = 'button[data-testid="header-create-board-button"]'
-    this.boardTittle = 'input[data-testid="create-board-title-input"]'
-    this.createSave = 'button[data-testid="create-board-submit-button"]'
+    this.createBoardButton = 'button[data-testid="header-create-menu-button"]';
+    this.createEmptyBoard = 'button[data-testid="header-create-board-button"]';
+    this.boardTittle = 'input[data-testid="create-board-title-input"]';
+    this.createSave = 'button[data-testid="create-board-submit-button"]';
   }
 
-  async createBoard(){
-    await this.page.click(this.createBoardButton)
-    await this.page.click(this.createEmptyBoard)
-    await this.page.fill(this.boardTittle, faker.lorem.words(2))
-     await this.page.click(this.createSave)
+  async createBoard() {
+    const titulo = faker.lorem.words(2);
+    await this.page.click(this.createBoardButton);
+    await this.page.click(this.createEmptyBoard);
+    await this.page.fill(this.boardTittle, titulo);
+    await this.page.click(this.createSave);
+    return titulo;
   }
 
   async openProfileMenu() {
@@ -27,7 +28,6 @@ export class BoardPage {
     await this.page.waitForSelector(this.profileButton, { state: "visible" });
     await this.page.dblclick(this.profileButton);
     await this.page.click(this.profileButton);
-
   }
 
   async clickLogout() {

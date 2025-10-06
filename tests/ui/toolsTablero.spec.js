@@ -1,10 +1,11 @@
-// tests/marcarFavorito.spec.js
 import { test, expect } from "../../utils/fixtures.js";
-import { ToolsTableroPage } from "../../pages/ToolsTablero.js";
+import { ToolsTableroPage } from "../../pages/toolsTablero.js";
 const { faker } = require("@faker-js/faker");
 import { screenshotPath } from "../../utils/helpers.js";
+import { Logger } from "../../utils/helpers.js";
 
 test("Marcar primer tablero como favorito", async ({ createFixture }) => {
+  Logger.info("Inicio del test");
   const tablero = new ToolsTableroPage(createFixture);
   try {
     await tablero.asegurarMarcado();
