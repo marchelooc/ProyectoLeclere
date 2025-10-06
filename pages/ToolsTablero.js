@@ -224,7 +224,7 @@ export class ToolsTableroPage {
   }
 
   async menuAtras() {
-    await this.page.click(this.btnMenuAtras);
+      await this.page.click(this.btnMenuAtras);
   }
 
   async editarAcercaTablero() {

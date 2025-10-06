@@ -1,15 +1,20 @@
 // tests/marcarFavorito.spec.js
-import { test, expect } from "../utils/fixtures.js";
-import { ToolsTableroPage } from "../pages/ToolsTablero";
+import { test, expect } from "../../utils/fixtures.js";
+import { ToolsTableroPage } from "../../pages/ToolsTablero.js";
 const { faker } = require("@faker-js/faker");
+import { screenshotPath } from "../../utils/helpers.js";
 
 test("Marcar primer tablero como favorito", async ({ createFixture }) => {
   const tablero = new ToolsTableroPage(createFixture);
-  await tablero.asegurarMarcado();
-  await tablero.verificarFavoritoMarcado();
-  await tablero.abrirMenu("Close board");
+  try {
+    await tablero.asegurarMarcado();
+    await tablero.verificarFavoritoMarcado();
+    await tablero.abrirMenu("Close board");
+  } catch (err) {
+    await page.screenshot({ path: screenshotPath(`Marcar primer tablero como favorito`) });
+    throw err;
+  }
 });
-
 
 test("Desmarcar primer tablero como favorito", async ({ createFixture }) => {
   const page = createFixture;
@@ -140,7 +145,6 @@ test("Acerca del tablero", async ({ createFixture }) => {
 
 test("Atras acerca del trablero", async ({ createFixture }) => {
   const page = createFixture;
-
   const tablero = new ToolsTableroPage(page);
   await tablero.abrirMenu("About this board");
   await tablero.verificarAcercaTablero();
@@ -148,16 +152,11 @@ test("Atras acerca del trablero", async ({ createFixture }) => {
   await tablero.abrirMenu("Close board");
 });
 
-/*
-test("Atras acerca del trablero", async ({
-  page,
-  loginFixture,
-  createFixture,
-}) => {
-  const tablero = new ToolsTableroPage(page);
+test("Atras  del trablero", async ({ createFixture }) => {
+  const tablero = new ToolsTableroPage(createFixture);
   await tablero.abrirMenu("About this board");
   await tablero.verificarAcercaTablero();
   await tablero.editarAcercaTablero();
   //await tablero.guardarDescripcion("Boton")
   await tablero.abrirMenu("Close board");
-});*/
+});
