@@ -27,15 +27,15 @@ export default defineConfig({
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
       testIgnore: [
-        "tests/configCard.spec.js",
-        "tests/addCard.spec.js",
+        "tests/ui/configCard.spec.js",
+        "tests/ui/addCard.spec.js",
       ],
     },
     {
       name: "chromium-es", // español solo para los test especificados
       testMatch: [
-        "tests/configCard.spec.js",
-        "tests/addCard.spec.js",
+        "tests/ui/configCard.spec.js",
+        "tests/ui/addCard.spec.js",
       ],
       use: {
         ...devices["Desktop Chrome"],
