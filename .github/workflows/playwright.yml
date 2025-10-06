@@ -31,7 +31,7 @@ jobs:
 
       # ejecución de los testcitos
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npx playwright test --headed=false
 
       # generación del report allure
       - name: Generate Allure report
