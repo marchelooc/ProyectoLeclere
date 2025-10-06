@@ -18,6 +18,8 @@ test("Crear Card exitosamente", async ({ loginFixture }) => {
   const cardPage = new CardPage(page);
   await page.waitForTimeout(10000);
   await cardPage.gotoCardPage()
+  console.log('Current URL:', await page.url());
+  await page.screenshot({ path: 'debug.png', fullPage: true });
   await cardPage.addCard("Tarjeta de prueba", "PARA PRUEBA");
   await cardPage.addCard("HOLA", "PARA PRUEBA");
 });
