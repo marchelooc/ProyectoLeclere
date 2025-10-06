@@ -19,6 +19,7 @@ test("Crear Card exitosamente", async ({ loginFixture }) => {
   await page.waitForTimeout(10000);
   await cardPage.gotoCardPage()
   console.log('Current URL:', await page.url());
+  console.log('🌍 Browser locale:', await page.evaluate(() => navigator.language));
   await page.screenshot({ path: 'debug.png', fullPage: true });
   //await cardPage.addCard("Tarjeta de prueba", "PARA PRUEBA");
   await cardPage.addCard("HOLA", "PARA PRUEBA");
