@@ -1,8 +1,8 @@
-import { test, expect } from "../utils/fixtures.js";
-import { CardPage } from "../pages/cardPage.js";
-import CARDS from "../data/cardsInfo.json";
-import LABELS from "../data/cardsLabel.json";
-/*
+import { test, expect } from "../../utils/fixtures.js";
+import { CardPage } from "../../pages/cardPage.js";
+import CARDS from "../../data/cardsInfo.json";
+import LABELS from "../../data/cardsLabel.json";
+
 //helper papu
 async function setupCardTest(loginFixture, cardTitle = "HOLA", cardDesc = "PARA PRUEBA") {
   const page = loginFixture;
@@ -125,6 +125,7 @@ for (const card of CARDS) {
   });
 }
 //este es la mejora del anterior test case CREAR ETIQUETAS aun esta en pruebas-------------------------------
+/*
 for (const label of LABELS) {
   test.describe(`Etiqueta tipo: ${label.tipeLabel}`, () => {
 

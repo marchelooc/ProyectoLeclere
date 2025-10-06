@@ -1,6 +1,6 @@
-import { test, expect } from "../utils/fixtures.js";
-const { TrelloCard } = require('../components/card.component.js');
-import { CardPage } from "../pages/cardPage.js";
+import { test, expect } from "../../utils/fixtures.js";
+const { TrelloCard } = require('../../components/card.component.js');
+import { CardPage } from "../../pages/cardPage.js";
 
 /*
 test("Crear Card exitosamente", async ({ page, loginFixture }) => {
