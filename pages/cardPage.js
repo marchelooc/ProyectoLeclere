@@ -55,6 +55,7 @@ export class CardPage {
   async addCard(text, lista) {
   const list = this.page.getByTestId('list-wrapper').filter({ has: this.page.getByRole('heading', { name: lista }) });
   const addCardBtn = list.getByTestId('list-add-card-button');
+    await addCardBtn.waitFor({ state: 'visible', timeout: 10000 });
     await addCardBtn.click();
     await this.page.fill(this.addCardText, text);
     await this.page.click(this.addCardConfirmBtn);
