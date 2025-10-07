@@ -5,7 +5,7 @@ import { ProfilePage } from "../../pages/profilePage.js";
 import { SettingsProfilePage } from "../../pages/settingsProfilePage.js";
 import { Logger } from "../../utils/helpers.js";
 
-test("Cambiar el tema de Trello", async ({ loginFixture }) => {
+test("@ui @smoke Cambiar el tema de Trello", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -41,7 +41,7 @@ test("Cambiar el tema de Trello", async ({ loginFixture }) => {
     }
 });
 
-test("Cambiar el username de Trello", async ({ loginFixture }) => {
+test("@ui @positive Cambiar el username de Trello", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main y pagina de perfil");
     const mainBoardPage = new MainBoardPage(page);
@@ -74,7 +74,7 @@ test("Cambiar el username de Trello", async ({ loginFixture }) => {
     }
 });
 
-test("Cambiar la biografía de Trello", async ({ loginFixture }) => {
+test("@ui @positive Cambiar la biografía de Trello", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main y pagina de perfil");
     const mainBoardPage = new MainBoardPage(page);
@@ -107,7 +107,7 @@ test("Cambiar la biografía de Trello", async ({ loginFixture }) => {
     }
 });
 
-test("Acceder a la seccion de Activity", async ({ loginFixture }) => {
+test("@ui @smoke Acceder a la seccion de Activity", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -125,7 +125,7 @@ test("Acceder a la seccion de Activity", async ({ loginFixture }) => {
     }
 });
 
-test("Acceder a la seccion de Cards", async ({ loginFixture }) => {
+test("@ui @smoke Acceder a la seccion de Cards", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -143,7 +143,7 @@ test("Acceder a la seccion de Cards", async ({ loginFixture }) => {
     }
 });
 
-test("Acceder y visualizar la seccion de Shortcuts", async ({ loginFixture }) => {
+test("@ui @smoke Acceder y visualizar la seccion de Shortcuts", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -161,7 +161,7 @@ test("Acceder y visualizar la seccion de Shortcuts", async ({ loginFixture }) =>
     }
 });
 
-test("Acceder a configuraciones y desactivar las sugerencias", async ({ loginFixture }) => {
+test("@ui @positive Acceder a configuraciones y desactivar las sugerencias", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main y pagina de configuraciones");
     const mainBoardPage = new MainBoardPage(page);
@@ -186,7 +186,7 @@ test("Acceder a configuraciones y desactivar las sugerencias", async ({ loginFix
     }
 });
 
-test("Acceder a configuraciones y desmarcar todas las preferencias", async ({ loginFixture }) => {
+test("@ui @positive Acceder a configuraciones y desmarcar todas las preferencias", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main y pagina de configuraciones");
     const mainBoardPage = new MainBoardPage(page);

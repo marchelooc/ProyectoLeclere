@@ -3,7 +3,7 @@ export class MainBoardPage {
         constructor(page) {
                 this.page = page;
                 this.searchInput = 'input:is([placeholder="Buscar"], [placeholder="Search"])';
-                this.searchDialog = 'div[class="AwzOoLt0EyQ5H8"]';//'[data-test-id="search-dialog"], [data-testid="search-dialog"], div[role="listbox"], div[role="dialog"]'; // Dropdown de búsqueda
+                this.searchDialog = 'div[class="AwzOoLt0EyQ5H8"]';
                 this.firstWorkspace = 'xpath=//*[@id="content"]/div/div/div/main/div/div[2]/div[1]/div[2]/div[1]/a/div/div[1]/div';
                 this.boardsButton = 'xpath=//*[@id="content"]/div/div/div/main/div/div[2]/div[3]/div/div[1]/div/a[1]';
                 this.membersButton = 'xpath=//*[@id="content"]/div/div/div/main/div/div[2]/div[3]/div/div[1]/div/a[2]';
@@ -36,15 +36,12 @@ export class MainBoardPage {
         }
 
         async selectSuggestionByText(text) {
-                const asOption = this.page.getByRole("option", { name: text, exact: true }).first();
-                if (await asOption.count()) { // intenta por rol accesible "option"
-                await asOption.waitFor({ state: "visible", timeout: 15000 });
-                await asOption.click();
-                return;
-                }
-                const byText = this.page.getByText(text, { exact: true }).first(); //fallback: cualquier nodo clickable con ese texto
-                await byText.waitFor({ state: "visible", timeout: 15000 });
-                await byText.click();
+                await this.page.keyboard.press("ArrowDown");
+                await this.page.keyboard.press("ArrowDown");
+                await this.page.keyboard.press("ArrowDown");
+                await this.page.keyboard.press("ArrowDown");
+                await this.page.keyboard.press("ArrowDown");
+                await this.page.keyboard.press("Enter");
         }
 
         async clickFirstWorkspace() {

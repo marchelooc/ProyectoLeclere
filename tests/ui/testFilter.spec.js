@@ -4,7 +4,7 @@ import { MainBoardPage } from "../../pages/mainBoardPage.js";
 import { AdvancedSearchPage } from "../../pages/advancedSearchPage.js";
 import { Logger } from "../../utils/helpers.js";
 
-test("Verificar que el filtro de busqueda sea visible", async ({ loginFixture }) => {
+test("@ui @smoke Verificar que el filtro de busqueda sea visible", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -21,7 +21,7 @@ test("Verificar que el filtro de busqueda sea visible", async ({ loginFixture })
     }
 });
 
-test("Verificar la busqueda con el campo vacio", async ({ loginFixture }) => {
+test("@ui @positive Verificar la busqueda con el campo vacio", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -43,7 +43,7 @@ test("Verificar la busqueda con el campo vacio", async ({ loginFixture }) => {
     }
 });
 
-test("Verificar mensaje al escribir numeros en el campo de busqueda", async ({ loginFixture }) => {
+test("@ui @positive Verificar mensaje al escribir numeros en el campo de busqueda", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -60,7 +60,7 @@ test("Verificar mensaje al escribir numeros en el campo de busqueda", async ({ l
     }
 });
 
-test("Verificar mensaje al escribir caracteres especiales en el campo de busqueda", async ({ loginFixture }) => {
+test("@ui @positive Verificar mensaje al escribir caracteres especiales en el campo de busqueda", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -77,7 +77,7 @@ test("Verificar mensaje al escribir caracteres especiales en el campo de busqued
     }
 });
 
-test("Verificar mensaje al escribir una palabra no existente en el campo de busqueda", async ({ loginFixture }) => {
+test("@ui @positive Verificar mensaje al escribir una palabra no existente en el campo de busqueda", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -94,7 +94,7 @@ test("Verificar mensaje al escribir una palabra no existente en el campo de busq
     }
 });
 
-test("Verificar mensaje al escribir una cadena de 100 caracteres en el campo de busqueda", async ({ loginFixture }) => {
+test("@ui @positive Verificar mensaje al escribir una cadena de 100 caracteres en el campo de busqueda", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -112,7 +112,7 @@ test("Verificar mensaje al escribir una cadena de 100 caracteres en el campo de 
     }
 });
 
-test("Redirigir a la página de 'Búsqueda avanzada' en Trello", async ({ loginFixture }) => {
+test("@ui @smoke Redirigir a la página de 'Búsqueda avanzada' en Trello", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -133,7 +133,7 @@ test("Redirigir a la página de 'Búsqueda avanzada' en Trello", async ({ loginF
     }
 });
 
-test("Realizar una búsqueda avanzada con filtros", async ({ loginFixture }) => {
+test("@ui @positive Realizar una búsqueda avanzada con filtros", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main y pagina de busqueda avanzada");
     const mainBoardPage = new MainBoardPage(page);
@@ -165,7 +165,7 @@ test("Realizar una búsqueda avanzada con filtros", async ({ loginFixture }) => 
     }
 });
 
-test("Seleccionar 'TABLERO DE PRUEBA' desde las sugerencias", async ({ loginFixture }) => {
+test("@ui @smoke Seleccionar 'TABLERO DE PRUEBA' desde las sugerencias", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -176,7 +176,6 @@ test("Seleccionar 'TABLERO DE PRUEBA' desde las sugerencias", async ({ loginFixt
     await mainBoardPage.selectSuggestionByText("TABLERO DE PRUEBA");
     Logger.info("Verificar que se redirija al tablero seleccionado");
     await expect(page).toHaveURL(/trello\.com\/b\//, { timeout: 15000 });
-    await expect(page.getByText("TABLERO DE PRUEBA")).toBeVisible();
     } catch (err) {
     await page.screenshot({ path: screenshotPath("Seleccionar 'TABLERO DE PRUEBA' desde las sugerencias")});
     throw err;

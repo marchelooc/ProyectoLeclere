@@ -10,7 +10,7 @@ import { ToolsTableroPage } from "../../pages/toolsTablero.js";
 import { BoardPage } from "../../pages/boardPage.js";
 
 
-test("Verificar que la ventana del Main Board es visible", async ({ loginFixture }) => {
+test("@ui @smoke Verificar que la ventana del Main Board es visible", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -25,7 +25,7 @@ test("Verificar que la ventana del Main Board es visible", async ({ loginFixture
     }
 });
 
-test("Seleccionar la primera opción de 'Recently viewed'", async ({ loginFixture }) => {
+test("@ui @smoke Seleccionar la primera opción de 'Recently viewed'", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -43,7 +43,7 @@ test("Seleccionar la primera opción de 'Recently viewed'", async ({ loginFixtur
     }
 });
 
-test("Hacer clic en el botón 'Tableros' y acceder a un tablero", async ({ loginFixture }) => {
+test("@ui @positive Hacer clic en el botón 'Tableros' y acceder a un tablero", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main y pagina de tableros");
     const mainBoardPage = new MainBoardPage(page);
@@ -68,7 +68,7 @@ test("Hacer clic en el botón 'Tableros' y acceder a un tablero", async ({ login
     }
 });
 
-test("Hacer clic en 'Ver los tableros cerrados'", async ({ loginFixture }) => {
+test("@ui @smoke Hacer clic en 'Ver los tableros cerrados'", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main y pagina de tableros");
     const mainBoardPage = new MainBoardPage(page);
@@ -93,7 +93,7 @@ test("Hacer clic en 'Ver los tableros cerrados'", async ({ loginFixture }) => {
     }
 });
 
-test("Hacer clic en la seccion de Inicio", async ({ loginFixture }) => {
+test("@ui @smoke Hacer clic en la seccion de Inicio", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main");
     const mainBoardPage = new MainBoardPage(page);
@@ -111,7 +111,7 @@ test("Hacer clic en la seccion de Inicio", async ({ loginFixture }) => {
     }
 });
 
-test("Verificar la funcionalidad de agregar miembros al workspace", async ({ loginFixture }) => {
+test("@ui @smoke Verificar la funcionalidad de agregar miembros al workspace", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main y pagina de miembros");
     const mainBoardPage = new MainBoardPage(page);
@@ -141,8 +141,7 @@ test("Verificar la funcionalidad de agregar miembros al workspace", async ({ log
     }
 });
 
-
-test("Crear un board usando el template de marketing", async ({ loginFixture }) => {
+test("@ui @smoke Crear un board usando el template de marketing", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main y pagina de templates");
     const mainBoardPage = new MainBoardPage(page);
@@ -176,7 +175,7 @@ test("Crear un board usando el template de marketing", async ({ loginFixture }) 
     }
 });
 
-test("Cambiar la visibilidad del Workspace", async ({ loginFixture }) => {
+test("@ui @positive Cambiar la visibilidad del Workspace", async ({ loginFixture }) => {
     const page = loginFixture;
     Logger.info("Crear pagina de main y pagina de settings");
     const mainBoardPage = new MainBoardPage(page);
