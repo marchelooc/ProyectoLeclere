@@ -300,7 +300,7 @@ test("@ui @positive Expandir una Lista", async ({ loginFixture }) => {
 
 test.describe("Agregar color a una Lista", () => {
   for (const color of colorsData.colors) {
-    test("@ui @positive Crea lista y aplica el Color: ${color}", async ({
+    test(´@ui @positive Crea lista y aplica el Color: ${color}´, async ({
       loginFixture,
     }) => {
       const page = loginFixture;
