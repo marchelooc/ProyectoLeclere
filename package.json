@@ -1,0 +1,32 @@
+{
+  "name": "proyectoleclere",
+  "version": "1.0.0",
+  "description": "este es el proyecto final del modulo 6 automatizar UI TRELLO",
+  "main": "playwright.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marchelooc/ProyectoLeclere.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marchelooc/ProyectoLeclere/issues"
+  },
+  "homepage": "https://github.com/marchelooc/ProyectoLeclere#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.55.1",
+    "@types/node": "^24.5.2",
+    "allure-commandline": "^2.34.1",
+    "allure-playwright": "^3.4.1",
+    "dotenv": "^17.2.2"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.0.0",
+    "winston": "^3.18.3"
+  }
+}
