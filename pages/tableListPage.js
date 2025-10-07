@@ -15,7 +15,6 @@ export class TableroPage {
         await this.page.waitForSelector(this.agregarNombreLista);
         await this.page.fill(this.agregarNombreLista, nombre);
         await this.page.click(this.botonAceptar);
-        
         const lista = this.page.locator('[data-testid="list-header"]', { hasText: nombre });
         await expect(lista).toContainText(nombre);
     }

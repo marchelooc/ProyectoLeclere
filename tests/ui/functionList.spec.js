@@ -82,8 +82,8 @@ test("@ui @smoke Archivar una Lista", async ({ loginFixture }) => {
     Logger.info("Ingresando al Tablero Mi tablero de Trello");
     await boardPage.clickBotonTablero();
     Logger.info("Agregando una lista para archivar")
-    await tableroPage.agregarLista("Lista de prueba");
-    const confListaPage = new ListPage(page, "Lista de Prueba");
+    await tableroPage.agregarLista("Lista de prueba Archivar");
+    const confListaPage = new ListPage(page, "Lista de Prueba Archivar");
     Logger.info("Archivando la lista");
     await confListaPage.archive();
     } catch (err) {
@@ -93,7 +93,8 @@ test("@ui @smoke Archivar una Lista", async ({ loginFixture }) => {
     }
 });
 
-test("@ui @positiva Contraer una Lista", async ({ loginFixture }) => {
+
+test("@ui @positive Contraer una Lista", async ({ loginFixture }) => {
     const page = loginFixture;
     try {
     const boardPage = new BoardPage(page);
@@ -101,8 +102,8 @@ test("@ui @positiva Contraer una Lista", async ({ loginFixture }) => {
     Logger.info("Ingresando al Tablero Mi tablero de Trello");
     await boardPage.clickBotonTablero();
     Logger.info("Agregando una lista para contraer");
-    await tableroPage.agregarLista("Lista de prueba");
-    const confListaPage = new ListPage(page, "Lista de Prueba");
+    await tableroPage.agregarLista("Lista de prueba Contraer");
+    const confListaPage = new ListPage(page, "Lista de Prueba Contraer");
     Logger.info("Contraiendo la lista");
     await confListaPage.contraerLista();
     await confListaPage.expandirLista();
@@ -116,7 +117,7 @@ test("@ui @positiva Contraer una Lista", async ({ loginFixture }) => {
 });
 
 
-test("@ui @positiva Editar Nombre de una Lista", async ({ loginFixture }) => {
+test("@ui @positive Editar Nombre de una Lista", async ({ loginFixture }) => {
     const page = loginFixture;
     try {
     const boardPage = new BoardPage(page);
@@ -124,9 +125,9 @@ test("@ui @positiva Editar Nombre de una Lista", async ({ loginFixture }) => {
     Logger.info("Ingresando al Tablero Mi tablero de Trello");
     await boardPage.clickBotonTablero();
     Logger.info("Agregando una lista para editar nombre");
-    await tableroPage.agregarLista("Lista de prueba");
+    await tableroPage.agregarLista("Lista de prueba para Editar");
     Logger.info("Renombrando la lista");
-    await tableroPage.renombrarLista(page,'Lista de Prueba','Renombrado');
+    await tableroPage.renombrarLista(page,'Lista de Prueba para Editar','Renombrado');
     Logger.info("Validando que se edito el nombre")
     await expect(page.locator('[data-testid="list-header"]', { hasText: 'Renombrado' })).toBeVisible();
     const confListaPage = new ListPage(page, "Renombrado");
@@ -139,7 +140,7 @@ test("@ui @positiva Editar Nombre de una Lista", async ({ loginFixture }) => {
     }           
 });
 
-test("@ui @positiva Seguir una Lista", async ({ loginFixture }) => {
+test("@ui @positive Seguir una Lista", async ({ loginFixture }) => {
     const page = loginFixture;
     try{
     const boardPage = new BoardPage(page);
@@ -164,7 +165,7 @@ test("@ui @positiva Seguir una Lista", async ({ loginFixture }) => {
     }
 });
 
-test("@ui @positiva Dejar de Seguir una Lista", async ({ loginFixture }) => {
+test("@ui @positive Dejar de Seguir una Lista", async ({ loginFixture }) => {
     const page = loginFixture;
     try {
     const boardPage = new BoardPage(page);
@@ -190,7 +191,7 @@ test("@ui @positiva Dejar de Seguir una Lista", async ({ loginFixture }) => {
     }
 });
 
-test("@ui @positiva Quitar Color de una Lista", async ({ loginFixture }) => {
+test("@ui @positive Quitar Color de una Lista", async ({ loginFixture }) => {
     const page = loginFixture;
     try {
     const boardPage = new BoardPage(page);
@@ -213,7 +214,7 @@ test("@ui @positiva Quitar Color de una Lista", async ({ loginFixture }) => {
     }
 });
 
-test("@ui @positiva Mover una Lista", async ({ loginFixture }) => {
+test("@ui @positive Mover una Lista", async ({ loginFixture }) => {
     const page = loginFixture;
     try {
     const boardPage = new BoardPage(page);
@@ -221,13 +222,13 @@ test("@ui @positiva Mover una Lista", async ({ loginFixture }) => {
     Logger.info("Ingresando al Tablero Mi tablero de Trello");
     await boardPage.clickBotonTablero();
     Logger.info("Agregando una lista para mover");
-    await tableroPage.agregarLista("Lista de prueba");
-    const confListaPage = new ListPage(page, "Lista de prueba");
+    await tableroPage.agregarLista("Lista de prueba para Mover");
+    const confListaPage = new ListPage(page, "Lista de prueba para Mover");
     Logger.info("Moviendo la lista");
     await confListaPage.moverLista();
     const listas = page.locator('[data-testid="list-header"]');
     Logger.info("Verificando que se movio la lista");
-    await expect(listas.nth(0)).toContainText('Lista de prueba');
+    await expect(listas.nth(0)).toContainText('Lista de prueba para Mover');
     Logger.info("Archivando la lista");
     await confListaPage.archive();
     } catch (err) {
@@ -237,7 +238,7 @@ test("@ui @positiva Mover una Lista", async ({ loginFixture }) => {
     }
 });
 
-test("@ui @positiva Expandir una Lista", async ({ loginFixture }) => {
+test("@ui @positive Expandir una Lista", async ({ loginFixture }) => {
     const page = loginFixture;
     try {
     const boardPage = new BoardPage(page);
@@ -245,8 +246,8 @@ test("@ui @positiva Expandir una Lista", async ({ loginFixture }) => {
     Logger.info("Ingresando al Tablero Mi tablero de Trello");
     await boardPage.clickBotonTablero();
     Logger.info("Agregando una lista para expandir");
-    await tableroPage.agregarLista("Lista de prueba");
-    const confListaPage = new ListPage(page, "Lista de prueba");
+    await tableroPage.agregarLista("Lista de prueba  para Expandir");
+    const confListaPage = new ListPage(page, "Lista de prueba Expandir");
     Logger.info("Contrayendo la lista");
     await confListaPage.contraerLista();
     Logger.info("Expandiendo la lista");
@@ -254,7 +255,7 @@ test("@ui @positiva Expandir una Lista", async ({ loginFixture }) => {
     Logger.info("Archivando la lista");
     await confListaPage.archive();
     } catch (err) {
-    await page.screenshot({ path: screenshotPath(`Marcar primer tablero como favorito`) });
+    await page.screenshot({ path: screenshotPath(`Expandir una Lista`) });
     throw err;
     Logger.error(err);
     }
@@ -262,7 +263,7 @@ test("@ui @positiva Expandir una Lista", async ({ loginFixture }) => {
 
 test.describe("Agregar color a una Lista", () => {
     for (const color of colorsData.colors) {
-        test(`@ui @positiva Crea lista y aplica el Color: ${color}`, async ({ loginFixture }) => {
+        test(`@ui @positive Crea lista y aplica el Color: ${color}`, async ({ loginFixture }) => {
         const page = loginFixture;
         try {
         const boardPage = new BoardPage(page);
@@ -270,18 +271,18 @@ test.describe("Agregar color a una Lista", () => {
         Logger.info("Ingresando al Tablero Mi tablero de Trello");
         await boardPage.clickBotonTablero();
         Logger.info("Agregando una lista para aplicar color");
-        await tableroPage.agregarLista("Lista de coloreada");
-        const confListaPage = new ListPage(page, "Lista de coloreada");
+        await tableroPage.agregarLista(`Lista de coloreada ${color}`);
+        const confListaPage = new ListPage(page,`Lista de coloreada ${color}`);
         Logger.info("Agregando color a la lista");
         await confListaPage.changeColor(color); // <-- ahora tu método recibe el color
-        const lista = page.locator('[data-testid="list"]', { hasText: 'Lista de coloreada' });
+        const lista = page.locator('[data-testid="list"]', { hasText: `Lista de coloreada ${color}` });
         Logger.info("Verificando que se aplico el color");
         const styleValue = await lista.getAttribute('style');
         expect(styleValue).toContain(`--ds-background-accent-${color}-subtler`);
         Logger.info("Archivando la lista");
         await confListaPage.archive();
         } catch (err) {
-        await page.screenshot({ path: screenshotPath(`Marcar primer tablero como favorito`) });
+        await page.screenshot({ path: screenshotPath(`Crea lista y aplica el Color`) });
         throw err;
         Logger.error(err);
         }

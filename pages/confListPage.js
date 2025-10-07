@@ -20,7 +20,7 @@ export class ListPage {
 
 
     async archive() {
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(1000);
         await this.menuButton.click();
         await this.archiveButton.waitFor({ state: "visible" });
         await this.archiveButton.click();
