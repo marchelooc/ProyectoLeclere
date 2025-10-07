@@ -40,6 +40,7 @@ export default defineConfig({
       use: {
         ...devices["Desktop Chrome"],
         locale: "es-ES",
+        storageState: 'storageState.json', // SESIÓN GUARDADA
       },
     },
   ],

@@ -1,24 +1,27 @@
 [
   { "tipeDate": "fecha inicio mayor a fecha final",  
-    "dateIni": "10/10/2025", "dateFin": "11/11/2025" ,"dateConfirm": "10 oct - 11 nov", "pased": true},
+    "dateIni": "11/11/2025", "dateFin": "9/9/2025" ,"dateConfirm": "8 sept - 9 sept", "pased": true},
 
-  { "tipeDate": "fecha final pasada",  "dateIni": "10/10/2025",
-    "dateFin": "11/11/2025" ,"dateConfirm": "/10 oct - 11 nov/", "pased": true},
+  { "tipeDate": "fecha final pasada",  
+    "dateIni": "1/1/2025", "dateFin": "3/3/2025" ,"dateConfirm": "1 ene - 3 mar", "pased": true},
 
-  { "tipeDate": "fecha inicio muy en el futuro",  
-    "dateIni": "10/10/2025", "dateFin": "11/11/2025" ,"dateConfirm": "10 oct - 11 nov", "pased": true},
+  { "tipeDate": "fecha inicio y fin futuras",  
+    "dateIni": "10/10/2029", "dateFin": "11/10/2029" ,"dateConfirm": "10 oct 2029 - 11 oct 2029", "pased": true},
+
+    { "tipeDate": "fecha inicio y fin cero",  
+    "dateIni": "0/0/0", "dateFin": "0/0/0" ,"dateConfirm": "1 feb 3 - 1 feb 3", "pased": true},
+
+    { "tipeDate": "fecha inicio y fin muy inferiores",  
+    "dateIni": "1/2/3", "dateFin": "1/2/3" ,"dateConfirm": "1 feb 3 - 1 feb 3", "pased": true},
 
   { "tipeDate": "fecha de formato no establecido 1-1-2025",
-    "dateIni": "10/10/2025", "dateFin": "11/11/2025" ,"dateConfirm": "10 oct - 11 nov", "pased": true},
+    "dateIni": "10-10-2025", "dateFin": "11-11-2025" ,"dateConfirm": "10 oct - 11 nov", "pased": true},
 
   { "tipeDate": "fecha sin numeros 1 de marzo 2025",
-    "dateIni": "10/10/2025", "dateFin": "11/11/2025" ,"dateConfirm": "10 oct - 11 nov", "pased": true},
-
-  { "tipeDate": "fecha de vencimineto pero quitar la fecha final",
-    "dateIni": "10/10/2025", "dateFin": "11/11/2025" ,"dateConfirm": "10 oct - 11 nov", "pased": true},
+    "dateIni": "1 de marzo 2025", "dateFin": "10 de marzo 2025" ,"dateConfirm": "26 feb - 28 feb", "pased": true},
 
   { "tipeDate": "fecha inexistente ejemplo un 31 de un mes q solo tiene 28dias",
-    "dateIni": "10/10/2025", "dateFin": "11/11/2025" ,"dateConfirm": "10 oct - 11 nov", "pased": true},
+    "dateIni": "26/2/2025", "dateFin": "31/2/2025" ,"dateConfirm": "26 feb - 28 feb", "pased": true},
 
   { "tipeDate": "fecha correcta",
     "dateIni": "10/10/2025", "dateFin": "11/11/2025" ,"dateConfirm": "10 oct - 11 nov", "pased": true}

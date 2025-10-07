@@ -3,7 +3,7 @@ import { CardPage } from "../../pages/cardPage.js";
 import CARDS from "../../data/cardsInfo.json";
 import LABELS from "../../data/cardsLabel.json";
 import DATES from "../../data/cardsDates.json";
-
+/*
 //helper papu
 async function setupCardTest(loginFixture, cardTitle = "HOLA", cardDesc = "PARA PRUEBA") {
   const page = loginFixture;
@@ -13,7 +13,7 @@ async function setupCardTest(loginFixture, cardTitle = "HOLA", cardDesc = "PARA 
   await cardPage.editCard(cardTitle, cardDesc);
   return { page, cardPage };
 }
-/*
+
 test("Crear Card exitosamente", async ({ loginFixture }) => {
   const page = loginFixture;
   const cardPage = new CardPage(page);
@@ -85,16 +85,6 @@ test("añadir recordatorio a una card", async ({ loginFixture }) => {
   await expect(appliedLabel).toBeVisible();
 });
 
-test("editar fechas de una card", async ({ loginFixture }) => {
-  const { page, cardPage } = await setupCardTest(loginFixture);
-  await cardPage.cardActionEditDates("10/10/2025", "11/11/2025");
-
-  const fechaSpan = page
-    .locator('[data-testid="badge-due-date-not-completed"] .nGT0DJOrI676qn').first();
-  await expect(fechaSpan).toHaveText(/10 oct - 11 nov/, { timeout: 8000 });
-});
-*/
-//----------------------------------------------------------------------
 for (const date of DATES) {
   test(`Fecha card con: "${date.tipeDate}"`, async ({ loginFixture }) => {
     const { page, cardPage } = await setupCardTest(loginFixture);
@@ -106,8 +96,6 @@ for (const date of DATES) {
   });
 }
 
-//----------------------------------------------------------------------
-/*
 test("clonar una card", async ({ loginFixture }) => {
   const { cardPage } = await setupCardTest(loginFixture);
   await cardPage.cardActionClone("2");

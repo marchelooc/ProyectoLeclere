@@ -1,6 +1,20 @@
-import { test, expect } from "../../utils/fixtures.js";
+import { test, expect } from "@playwright/test";
+//import { test, expect } from "../../utils/fixtures.js";
 const { TrelloCard } = require('../../components/card.component.js');
 import { CardPage } from "../../pages/cardPage.js";
+
+
+
+test("Crear Card exitosamente", async ({ page }) => {
+  const cardPage = new CardPage(page);
+  await page.waitForTimeout(6000);
+  await cardPage.gotoCardPage()
+  console.log('Current URL:', await page.url());
+  console.log('🌍 Browser locale:', await page.evaluate(() => navigator.language));
+  await page.screenshot({ path: 'debug.png', fullPage: true });
+  await cardPage.addCard("Tarjeta de prueba", "PARA PRUEBA");
+  await cardPage.addCard("HOLA", "PARA PRUEBA");
+});
 
 /*
 test("Crear Card exitosamente", async ({ page, loginFixture }) => {
