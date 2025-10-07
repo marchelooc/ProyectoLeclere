@@ -22,7 +22,8 @@ test("@ui @smoke @positive Precondición: login exitoso", async ({ loginFixture 
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Precondición: login exitoso`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -44,7 +45,8 @@ test("@ui @smoke @positive Crear tablero con titulo valido y fondo por defecto",
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Crear tablero con titulo valido y fondo por defecto`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -66,7 +68,8 @@ test("@ui @smoke Crear tablero seleccionando fondo de color solido", async ({ lo
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Crear tablero seleccionando fondo de color solido`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -88,7 +91,8 @@ test("@ui @smoke @exploratory Crear tablero seleccionando una imagen de fondo", 
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Crear tablero seleccionando una imagen de fondo`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -110,7 +114,8 @@ test("@ui @positive Crear tablero con el campo Visibilidad por defecto", async (
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Crear tablero con el campo Visibilidad por defecto`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -123,7 +128,8 @@ test("@ui @exploratory Redirigir a la galería de plantillas desde el boton de p
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Redirigir a la galería de plantillas desde el boton de plantillas`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -136,7 +142,8 @@ test("@ui @exploratory Cerrar formulario sin crear tablero", async ({ loginFixtu
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Cerrar formulario sin crear tablero`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -149,7 +156,8 @@ test("@ui @exploratory Crear varios tableros con el mismo nombre", async ({ logi
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Crear varios tableros con el mismo nombre`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -171,7 +179,8 @@ test("@ui @positive Crear tablero con nombre alfanumerico", async ({ loginFixtur
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Crear tablero con nombre alfanumerico`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -193,7 +202,8 @@ test("@ui @positive Crear tablero con nombre numerico", async ({ loginFixture })
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Crear tablero con nombre numerico`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -213,7 +223,8 @@ test("@ui @positive Crear tablero con nombres con caracteres especiales", async 
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Crear tablero con nombres con caracteres especiales`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -233,11 +244,12 @@ test("@ui @positive Crear tablero con caracteres especiales", async ({ loginFixt
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Crear tablero con caracteres especiales`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
-test("@ui @positive Crear tablero con el limite maximo permitido de caracteres", async ({ loginFixture }) => {
+test("@ui @positive @boundary Crear tablero con el limite maximo permitido de caracteres", async ({ loginFixture }) => {
   const page = loginFixture;
   Logger.info("Abrir pagina de tableros")
   const boardPage = new BoardPage(page);
@@ -255,11 +267,12 @@ test("@ui @positive Crear tablero con el limite maximo permitido de caracteres",
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Crear tablero con el limite maximo permitido de caracteres`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
-test("@ui @negative Verificar que no permita crear tablero con el limite maximo no permitido de caracteres", async ({ loginFixture }) => {
+test("@ui @negative @boundary Verificar que no permita crear tablero con el limite maximo no permitido de caracteres", async ({ loginFixture }) => {
   const page = loginFixture;
   Logger.info("Abrir pagina de tableros")
   const boardPage = new BoardPage(page);
@@ -273,7 +286,8 @@ test("@ui @negative Verificar que no permita crear tablero con el limite maximo 
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Verificar que no permita crear tablero con el limite maximo no permitido de caracteres`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -295,7 +309,8 @@ test("@ui @smoke Crear tablero desde una plantilla", async ({ loginFixture }) =>
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Crear tablero desde una plantilla`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -314,7 +329,8 @@ test("@ui @positive Cambiar título de tablero desde plantilla", async ({ loginF
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Cambiar el título de tablero desde plantilla`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -332,7 +348,8 @@ test("@ui @positive @exploratory Crear tablero desde plantilla desmarcando 'Cons
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Crear tablero desde plantilla desmarcando 'Conservar tarjetas'`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -344,7 +361,8 @@ test("@ui @positive @exploratory Verificar que explorar plantillas redirige a ot
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Verificar que explorar plantillas redirige a otra página`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -363,7 +381,8 @@ test("@ui @positive Cambiar título de tablero(alfanumerico) desde plantilla", a
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Cambiar el titulo de tablero(alfanumerico) desde plantilla`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
 
@@ -382,6 +401,7 @@ test("@ui @positive Cambiar título de tablero(numerico) desde plantilla", async
   } catch (err) {
     await page.screenshot({
       path: screenshotPath(`Cambiar el titulo de tablero(numerico) desde plantilla`),
-    }); throw err;
+    }); Logger.error(err); 
+    throw err;
   }
 });
