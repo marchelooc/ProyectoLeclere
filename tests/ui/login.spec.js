@@ -3,7 +3,7 @@ import { LoginPage } from "../../pages/LoginPage.js";
 import users from "../../data/users.json" assert { type: "json" };
 import { Logger, screenshotPath } from "../../utils/helpers.js"; 
 
-test("Verificar que correo incluya @", async ({ page }) => {
+test("@ui @negative Verificar que correo incluya @", async ({ page }) => {
   const loginPage = new LoginPage(page);
   try {
     Logger.info("Ir a la página de login");
@@ -25,7 +25,7 @@ test("Verificar que correo incluya @", async ({ page }) => {
   }
 });
 
-test("Verificar que el campo correo no permita caracteres especiales", async ({ page }) => {
+test("@ui @negative Verificar que el campo correo no permita caracteres especiales", async ({ page }) => {
   const loginPage = new LoginPage(page);
   try {
     Logger.info("Ir a la página de login");
@@ -47,7 +47,7 @@ test("Verificar que el campo correo no permita caracteres especiales", async ({ 
   }
 });
 
-test("Verificar que el campo correo no permita espacios vacíos", async ({ page }) => {
+test("@ui @negative Verificar que el campo correo no permita espacios vacíos", async ({ page }) => {
   const loginPage = new LoginPage(page);
   try {
     Logger.info("Ir a la página de login");
@@ -69,7 +69,7 @@ test("Verificar que el campo correo no permita espacios vacíos", async ({ page 
   }
 });
 
-test("Verificar que correo sea obligatorio", async ({ page }) => {
+test("@ui @negative Verificar que correo sea obligatorio", async ({ page }) => {
   const loginPage = new LoginPage(page);
   try {
     Logger.info("Ir a la página de login");
@@ -89,7 +89,7 @@ test("Verificar que correo sea obligatorio", async ({ page }) => {
   }
 });
 
-test("Verificar que el campo contraseña sea obligatorio", async ({ page }) => {
+test("@ui @negative Verificar que el campo contraseña sea obligatorio", async ({ page }) => {
   const loginPage = new LoginPage(page);
   try {
     Logger.info("Ir a la página de login");
@@ -109,7 +109,7 @@ test("Verificar que el campo contraseña sea obligatorio", async ({ page }) => {
   }
 });
 
-test("Verificar que correo no válido sea rechazado", async ({ page }) => {
+test("@ui @negative Verificar que correo no válido sea rechazado", async ({ page }) => {
   const loginPage = new LoginPage(page);
   try {
     Logger.info("Ir a la página de login");
@@ -131,7 +131,7 @@ test("Verificar que correo no válido sea rechazado", async ({ page }) => {
   }
 });
 
-test("Verificar que no se pueda iniciar sesión con contraseña incorrecta", async ({ page }) => {
+test("@ui @negative Verificar que no se pueda iniciar sesión con contraseña incorrecta", async ({ page }) => {
   const loginPage = new LoginPage(page);
   try {
     Logger.info("Ir a la página de login");

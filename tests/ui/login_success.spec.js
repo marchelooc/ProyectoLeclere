@@ -2,7 +2,7 @@ import { test, expect } from "../../utils/fixtures.js";
 import { BoardPage } from "../../pages/BoardPage.js";
 import { Logger, screenshotPath } from "../../utils/helpers.js";
 
-test("Verificar el acceso exitoso al board de Trello", async ({ loginFixture }) => {
+test("@ui @smoke @positive Verificar el acceso exitoso al board de Trello", async ({ loginFixture }) => {
   const page = loginFixture;
   const boardPage = new BoardPage(page);
 

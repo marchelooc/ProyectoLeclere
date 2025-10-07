@@ -3,7 +3,7 @@ import { BoardPage } from "../../pages/BoardPage.js";
 import { LogoutPage } from "../../pages/LogoutPage.js";
 import { Logger, screenshotPath } from "../../utils/helpers.js";
 
-test("Verificar el cierre de sesión exitoso", async ({ loginFixture }) => {
+test("@ui @smoke @positive Verificar el cierre de sesión exitoso", async ({ loginFixture }) => {
   const page = loginFixture;
   const boardPage = new BoardPage(page);
   const logoutPage = new LogoutPage(page);
