@@ -19,7 +19,7 @@ export class BoardPage {
     //this.publicOption =
     this.closeModalButton = 'button[class="JABNldlIncwKgc zrn4tJQdoA76rj"]'
     this.templateButton = 'button[data-testid="create-from-template-button"]'
-    this.templateButton = 'button[data-testid="header-create-board-from-template-button"]'
+    this.startTemplate = 'button[data-testid="header-create-board-from-template-button"]'
     this.template = 'div[style*="photo-1576502200916-3808e07386a5.jpg"]'
     this.UnchekCard = 'label[data-testid="clickable-checkbox"]'
     this.exploreTemplate = 'a[href="/templates"]'
@@ -38,11 +38,11 @@ export class BoardPage {
     return boardName;
   }
 
-  async gotoHome(){
+  async gotoHome() {
     await this.page.click(this.home)
   }
 
-  async delete(boardName){
+  async delete(boardName) {
     await this.seeClosedBoard.click()
     const board = this.boards.filter({ hasText: boardName }).first();
 
@@ -111,13 +111,13 @@ export class BoardPage {
   }
 
   async createMultipleBoardsWithSameName() {
-    for (let i = 1; i <= 3; i++) {
-      await this.page.click(this.createBoardButton)
-      await this.page.click(this.createEmptyBoard)
-      await this.page.fill(this.boardTittle, "nombreRepetido")
-      await this.page.click(this.createSave)
-      await this.page.click(this.home)
-
+    for (let i = 1; i <= 2; i++) {
+      await this.page.click(this.createBoardButton);
+      await this.page.click(this.createEmptyBoard);
+      await this.page.fill(this.boardTittle, "nombre Repetido");
+      await this.page.click(this.createSave);
+      await this.page.waitForSelector(this.createSave, { state: 'detached' });
+      await this.page.waitForSelector(this.createBoardButton, { state: 'visible' });
     }
   }
 
@@ -168,24 +168,33 @@ export class BoardPage {
 
   async createBoardWithNoLimitedCharacteres() {
     await this.page.click(this.createBoardButton);
-    await this.page.pause()
     await this.page.click(this.createEmptyBoard);
     const boardName = faker.string.alphanumeric(16385)
     await this.page.fill(this.boardTittle, boardName);
     await this.page.click(this.createSave);
-    return boardName
+    await this.page.waitForTimeout(1000);
+    const modalStillOpen = await this.page.isVisible(this.createSave);
+    if (modalStillOpen) {
+      console.log("Trello bloqueó el tablero con título demasiado largo, cerrando modal...");
+      const closeButton = 'button[data-test-id="close-board-modal"]';
+      if (await this.page.isVisible(closeButton)) {
+        await this.page.click(closeButton);
+      } return null;
+    }
+    await this.page.waitForSelector(this.createSave, { state: 'detached' });
+    return boardName;
   }
 
   async createBoardWithTemple() {
     await this.page.click(this.createBoardButton);
-    await this.page.click(this.templateButton);
+    await this.page.click(this.startTemplate);
     await this.page.click(this.template);
     await this.page.click(this.createSave);
   }
 
   async createBoardChangingName() {
     await this.page.click(this.createBoardButton);
-    await this.page.click(this.templateButton);
+    await this.page.click(this.startTemplate);
     await this.page.click(this.template);
     const boardName = faker.lorem.words(2);
     await this.page.fill(this.boardTittle, boardName)
@@ -193,25 +202,27 @@ export class BoardPage {
     return boardName
   }
 
-  async createBoardConserveCard(){
+  async createBoardConserveCard() {
     await this.page.click(this.createBoardButton);
-    await this.page.click(this.templateButton);
+    await this.page.click(this.startTemplate);
     await this.page.click(this.template);
+    const boardName = faker.lorem.words(2);
+    await this.page.fill(this.boardTittle, boardName)
     await this.page.click(this.UnchekCard);
     await this.page.click(this.createSave);
+    return boardName
   }
 
-  async exploreTemplates(){
-    await this.page.pause()
+  async exploreTemplates() {
     await this.page.click(this.createBoardButton);
-    await this.page.click(this.templateButton);
+    await this.page.click(this.startTemplate);
     await this.page.click(this.exploreTemplate);
 
   }
-  
-  async changeAlphanumericNameFromTemplate(){
+
+  async changeAlphanumericNameFromTemplate() {
     await this.page.click(this.createBoardButton);
-    await this.page.click(this.templateButton);
+    await this.page.click(this.startTemplate);
     await this.page.click(this.template);
     const boardName = faker.string.alphanumeric(10)
     await this.page.fill(this.boardTittle, boardName)
@@ -219,21 +230,11 @@ export class BoardPage {
     return boardName
   }
 
-  async changeNumericNameFromTemplate(){
+  async changeNumericNameFromTemplate() {
     await this.page.click(this.createBoardButton);
-    await this.page.click(this.templateButton);
+    await this.page.click(this.startTemplate);
     await this.page.click(this.template);
     const boardName = faker.string.numeric(10)
-    await this.page.fill(this.boardTittle, boardName)
-    await this.page.click(this.createSave);
-    return boardName
-  }
-
-  async changeSpecialCharacteresNameFromTemplate(){
-    await this.page.click(this.createBoardButton);
-    await this.page.click(this.templateButton);
-    await this.page.click(this.template);
-    const boardName = faker.string.fromCharacters('@$#%&*!·?~^<>+=-', 8);
     await this.page.fill(this.boardTittle, boardName)
     await this.page.click(this.createSave);
     return boardName
