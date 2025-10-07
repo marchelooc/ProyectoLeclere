@@ -24,7 +24,8 @@ export const test = base.extend({
     const boardPage = new BoardPage(loginFixture);
     const tituloTablero = await boardPage.createBoard();
     await use(loginFixture);
-    //await boardPage.delete(tituloTablero)
+    await boardPage.gotoHome()
+    await boardPage.delete(tituloTablero)
   },
 
   createListFixture: async ({ loginFixture }, use, testInfo) => {
