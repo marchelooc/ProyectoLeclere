@@ -1,5 +1,5 @@
 import { test, expect } from "../../utils/fixtures.js";
-import { BoardPage } from "../../pages/BoardPage.js";
+import { BoardPage } from "../../pages/boardPage.js";
 import { Logger, screenshotPath } from "../../utils/helpers.js";
 
 test("@ui @smoke @positive Verificar el acceso exitoso al board de Trello", async ({ loginFixture }) => {
