@@ -263,4 +263,8 @@ export class BoardPage {
     await this.page.locator('div.pIQ5_g4p0XJopD', { hasText: 'Mi tablero de Trello' }).first().click();
     
   }
+
+  async clickBotonTableroName(nombre) { 
+    await this.page.locator('div.pIQ5_g4p0XJopD', { hasText: `${nombre}` }).first().click();
+  }
 }
