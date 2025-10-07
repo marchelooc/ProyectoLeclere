@@ -1,0 +1,18 @@
+[
+  { "tipeLabel": "con nombre y color",  "nameLabel": "etiqueta 1", "confirmNameLabel": "“etiqueta 1”",
+    "colorLabel": "yellow_dark" , "confirmColorLabel": "amarillo intenso"   , "pased": true},
+
+  { "tipeLabel": "sin nombre ni color", "nameLabel": "", "confirmNameLabel": "“etiqueta 1”",
+    "colorLabel": ""        , "confirmColorLabel": "amarillo intenso"   , "pased": false},  
+
+  { "tipeLabel": "con solo nombre",     "nameLabel": "etiqueta 1", "confirmNameLabel": "“etiqueta 1”",
+    "colorLabel": ""         , "confirmColorLabel": "amarillo intenso"   , "pased": true},
+
+  { "tipeLabel": "con solo color",      "nameLabel": "", "confirmNameLabel": "ninguno",
+    "colorLabel": "red"       , "confirmColorLabel": "rojo"  , "pased": true},
+    
+  { "tipeLabel": "repetido (etiqueta 1)", "nameLabel": "etiqueta 1", "confirmNameLabel": "ninguno",
+    "colorLabel": "yellow_dark"        , "confirmColorLabel": "rojo" , "pased": false}      
+]
+
+

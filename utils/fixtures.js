@@ -2,6 +2,7 @@
 import { test as base } from "@playwright/test";
 import { LoginPage } from "../pages/loginPage.js";
 import { BoardPage } from "../pages/boardPage.js";
+import { TableroPage } from "../pages/tableListPage.js";
 import dotenv from "dotenv";
 import { ToolsTableroPage } from "../pages/toolsTablero.js";
 
@@ -33,6 +34,18 @@ export const test = base.extend({
     await boardPage.gotoHome();
     await boardPage.delete(tituloFinal);
   },
+  createListFixture: async ({ loginFixture }, use, testInfo) => {
+    testInfo.setTimeout(60000);
+    const boardPage = new BoardPage(loginFixture);
+    const tituloTablero = await boardPage.createBoard();
+    await boardPage.clickBotonTableroName(tituloTablero);
+
+    const listPage = new TableroPage(boardPage);
+    await listPage.agregarLista('PARA PRUEBA');
+    await listPage.agregarLista('2');
+    await use(loginFixture);
+    //await boardPage.delete(tituloTablero)
+  }
 });
 
 export const expect = base.expect;
