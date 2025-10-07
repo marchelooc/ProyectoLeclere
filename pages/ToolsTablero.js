@@ -28,8 +28,14 @@ export class ToolsTableroPage {
     this.btnMenu = 'button[aria-label="Show menu"]';
     this.acercaTablero = 'div[data-testid="board-menu-container"]';
     this.btnMenuAtras = 'button[aria-label="Return to previous screen"]';
-    this.btnEditAcerca = 'button[data-testid="description-edit-button"]';
-    this.btnCerrarCompartir = 'button[data-testid="board-invite-modal-close-button"]'
+    this.btnEditAcerca =
+      'button[data-testid="description-content-placeholder"]';
+    this.btnGruardarAcerca = 'button[data-testid="description-save-button"]';
+    this.descripcion = page.locator(
+      'div[data-testid="description-content-area"]'
+    );
+    this.btnCerrarCompartir =
+      'button[data-testid="board-invite-modal-close-button"]';
   }
 
   async seleccionarPrimerTablero() {
@@ -208,7 +214,6 @@ export class ToolsTableroPage {
       await this.page.click(this.btnMenu);
       await expect(menu).toBeVisible();
     }
-    //await this.page.pause()
     await menu.getByRole("button", { name: opcion }).first().click();
     if (opcion === "Close board") {
       const confirm = 'button[data-testid="popover-close-board-confirm"]';
@@ -224,7 +229,7 @@ export class ToolsTableroPage {
   }
 
   async menuAtras() {
-      await this.page.click(this.btnMenuAtras);
+    await this.page.click(this.btnMenuAtras);
   }
 
   async editarAcercaTablero() {
@@ -240,8 +245,17 @@ export class ToolsTableroPage {
         el.appendChild(p);
       });
     }, textoNuevo);
+    return textoNuevo;
   }
 
-  async guardarDescripcion() {}
-  async borrarTablero() {}
+  async guardarDescripcion() {
+    await this.page.click(this.btnGruardarAcerca);
+  }
+  async verificarGuardado(textoEsperado) {
+    await this.descripcion.waitFor({ state: "visible", timeout: 5000 });
+    const actual = await this.descripcion.innerText();
+    const normalizar = (texto) =>
+      texto.replace(/\s+/g, " ").replace(/\.\s*/g, ". ").trim();
+    await expect(normalizar(actual)).toContain(normalizar(textoEsperado));
+  }
 }
