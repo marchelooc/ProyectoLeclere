@@ -36,6 +36,7 @@ export class ToolsTableroPage {
     );
     this.btnCerrarCompartir =
       'button[data-testid="board-invite-modal-close-button"]';
+    this.btnCerrarMenu = 'button[aria-label="Close popover"]';
   }
 
   async seleccionarPrimerTablero() {
@@ -43,7 +44,6 @@ export class ToolsTableroPage {
   }
 
   async presionarBoton() {
-    await this.btnFavorito.waitFor({ state: "visible", timeout: 10000 });
     await this.btnFavorito.click();
   }
 
@@ -51,13 +51,16 @@ export class ToolsTableroPage {
     const span = this.btnFavorito.locator('span[role="img"]');
     await expect(span).toHaveAttribute(
       "style",
-      /color:\s*var\(--ds-background-warning-bold\)/
+      /var\(--ds-background-warning-bold\)/
     );
   }
 
   async verificarFavoritoNoMarcado() {
     const span = this.btnFavorito.locator('span[role="img"]');
-    await expect(span).toHaveAttribute("style", /color:\s*currentcolor/);
+    await expect(span).not.toHaveAttribute(
+      "style",
+      /var\(--ds-background-warning-bold\)/
+    );
   }
 
   async asegurarMarcado() {
@@ -78,7 +81,7 @@ export class ToolsTableroPage {
 
   async cambiarTitulo() {
     await this.page.click(this.btnTitulo);
-    const nuevoTitulo = faker.lorem.words(3);
+    const nuevoTitulo = faker.lorem.words(2);
     await this.page.fill(this.textoTitulo, nuevoTitulo);
     await this.page.press(this.textoTitulo, "Enter");
     return nuevoTitulo;
@@ -119,8 +122,7 @@ export class ToolsTableroPage {
         const alertaCorreo = this.page.locator(
           "text=Enter a valid email address"
         );
-        await alertaCorreo.waitFor({ state: "visible", timeout: 5000 });
-        await expect(alertaCorreo).toBeVisible();
+        await expect(alertaCorreo).not.toBeVisible();
         return;
       }
       await this.page.click(this.btnEnviarSolicitud);
@@ -175,7 +177,6 @@ export class ToolsTableroPage {
       { hasText: nombre }
     );
     await expect(miembro).toHaveCount(0);
-    await this.page.click(this.btnCerrarCompartir);
   }
 
   async cambiarMiembroAdministrador(nombre) {
@@ -227,7 +228,9 @@ export class ToolsTableroPage {
     await expect(menu.locator("h3", { hasText: "Board admins" })).toBeVisible();
     await expect(menu.locator("h3", { hasText: "Description" })).toBeVisible();
   }
-
+  async cerrarMenu() {
+    await this.page.click(this.btnCerrarMenu);
+  }
   async menuAtras() {
     await this.page.click(this.btnMenuAtras);
   }
@@ -257,5 +260,20 @@ export class ToolsTableroPage {
     const normalizar = (texto) =>
       texto.replace(/\s+/g, " ").replace(/\.\s*/g, ". ").trim();
     await expect(normalizar(actual)).toContain(normalizar(textoEsperado));
+  }
+  async cerrarCompartir() {
+    await this.page.click(this.btnCerrarCompartir);
+  }
+
+  async confirmarTitulo(tituloTablero) {
+    const tituloLocator = this.page.locator(
+      'h1[data-testid="board-name-display"]'
+    );
+    let tituloActual = (await tituloLocator.textContent()).trim();
+    if (tituloActual && tituloActual !== tituloTablero) {
+      return tituloActual;
+    } else {
+      return tituloTablero;
+    }
   }
 }

@@ -12,6 +12,7 @@ export default defineConfig({
   //reporter: "html",
   reporter: [["line"], ["allure-playwright"]],
   timeout: 30000,
+  workers : 1,
   expect: {
     timeout: 5000,
   },
