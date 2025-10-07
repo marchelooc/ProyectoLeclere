@@ -3,6 +3,7 @@ import { test as base } from "@playwright/test";
 import { LoginPage } from "../pages/loginPage.js";
 import { BoardPage } from "../pages/boardPage.js";
 import dotenv from "dotenv";
+import { ToolsTableroPage } from "../pages/toolsTablero.js";
 
 dotenv.config();
 
@@ -14,8 +15,12 @@ export const test = base.extend({
       process.env.TRELLO_EMAIL,
       process.env.TRELLO_PASSWORD
     );
-    await page.waitForURL('https://trello.com/u/consorciolecrere/boards', { timeout: 15000 });
-    await page.waitForSelector('[data-testid="create-board-tile"]', { timeout: 10000 });
+    await page.waitForURL("https://trello.com/u/consorciolecrere/boards", {
+      timeout: 15000,
+    });
+    await page.waitForSelector('[data-testid="create-board-tile"]', {
+      timeout: 10000,
+    });
     await use(page);
   },
   createFixture: async ({ loginFixture }, use, testInfo) => {
@@ -23,9 +28,11 @@ export const test = base.extend({
     const boardPage = new BoardPage(loginFixture);
     const tituloTablero = await boardPage.createBoard();
     await use(loginFixture);
-    //await boardPage.delete(tituloTablero)
+    const toolsTablero = new ToolsTableroPage(loginFixture)
+    const tituloFinal = await toolsTablero.confirmarTitulo(tituloTablero)
+    await boardPage.gotoHome();
+    await boardPage.delete(tituloFinal);
   },
-
 });
 
 export const expect = base.expect;
