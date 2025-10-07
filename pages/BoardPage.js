@@ -258,4 +258,9 @@ export class BoardPage {
     await this.page.click(this.confirmLogoutButton);
     await expect(this.page).toHaveURL("https://trello.com/");
   }
+  async clickBotonTablero() {
+    
+    await this.page.locator('div.pIQ5_g4p0XJopD', { hasText: 'Mi tablero de Trello' }).first().click();
+    
+  }
 }
