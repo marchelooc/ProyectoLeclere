@@ -38,8 +38,6 @@ export class CardPage {
     this.copyLinkBtnCard = this.page.locator(`button[data-testid="quick-card-editor-copy-link"]`);
     //mover card
     this.moveCardBtn = this.page.locator(`button[data-testid="quick-card-editor-move"]`);
-
-    
   }
 
   async gotoCardPage() {
@@ -93,15 +91,25 @@ export class CardPage {
     const crearDialog = this.page.getByRole('dialog', { name: 'Crear etiqueta' });
     await expect(crearDialog).toBeVisible();
     //presionar el botón del color
-    const colorBtn = crearDialog.locator(`[data-testid="color-tile-${color}"]`);
-    await colorBtn.click();
+    if(color){
+      const colorBtn = crearDialog.locator(`[data-testid="color-tile-${color}"]`);
+      await colorBtn.click();
+    }else{
+      const colorBtn = crearDialog.locator(`[class="_1e0c1o8l _1o9zidpf _vyfuvuon _vwz4kb7n _1szv15vq _1tly15vq _rzyw1osq _17jb1osq _1ksvoz0e _3se1x1jp _re2rglyw _1veoyfq0 _1kg81r31 _jcxd1r8n _gq0g1onz _1trkwc43"]`);
+      await colorBtn.click();
+    }
     //añadir texto
-    const colorInput = crearDialog.getByRole('textbox', { name: 'Título' });
-    await colorInput.fill(title);
+    if(title){
+      const colorInput = crearDialog.getByRole('textbox', { name: 'Título' });
+      await colorInput.fill(title);
+    }
     //presionar guardar
-    const crearInput = crearDialog.getByRole('button', { name: 'Crear' });
-    await crearInput.click();
-    //await expect(locator).toBeVisible();
+    if(color || title){
+      const crearInput = crearDialog.getByRole('button', { name: 'Crear' });
+      await crearInput.click();
+    }else{
+      this.closeDialogBtn.click();
+    }
   }
 
   async cardActionColorBlindMode() {
@@ -131,8 +139,6 @@ export class CardPage {
     const dialog = this.page.getByRole('dialog', { name: 'Fechas' });
     if (!(await dialog.isVisible())) {
       await this.dateCardBtn.click();
-      //await dialog.waitFor()
-      //await dialog.waitFor({ state: 'visible' });
     }
     await this.dateReminderCardListBtn.click();
     await this.page.getByRole('option', { name: option }).click();
@@ -175,8 +181,6 @@ export class CardPage {
     await newPage.goto(copiedLink);
   }
 
-  //-------------------------------------------------------------------------------------------
-
     async cardActionMoveList(listName) {
     await this.moveCardBtn.click();
     const listDropdown = this.page.getByTestId('move-card-popover-select-list-destination-select--input');
@@ -185,9 +189,6 @@ export class CardPage {
     await this.cloneConfirmBtnCard.click();
   }
 
-
-  //---------------------------------------------------------------------------------------------
-
   async closeDialogCard() {
     await this.closeDialogBtn.click();
   }
@@ -195,35 +196,17 @@ export class CardPage {
     await this.closeBtnCard.click();
   }
 
-  //_____________________________________________________________
   async editCard(cardTitle, listTitle) {
-    // localizar la lista por título
+
     const list = this.page
       .getByTestId('list-wrapper')
       .filter({ has: this.page.getByRole('heading', { name: listTitle }) });
-    // localizar la tarjeta dentro de esa lista
+
     const card = list
       .getByRole('listitem')
       .filter({ has: this.page.getByRole('link', { name: cardTitle }) });
-    //uevada del miguel
-    //this.header = page.locator('[data-testid="list-header"]', { hasText: listName });
     // hover para revelar acciones
     await card.hover();
-    // hacer clic en el botón de edición
     await card.getByTestId('quick-card-editor-button').click();
   }
-  /*
-  async cardActionEditLabels(color) {
-    // abrir menú etiquetas
-    await this.labelCardBtn.click();
-    // espera a que aparezca el diálogo
-    const dialog = this.page.getByRole('dialog', { name: 'Etiquetas' });
-    await expect(dialog).toBeVisible();
-
-    // busca el color SOLO dentro del diálogo
-    const labelOption = dialog.locator(`span[data-color="${color}"]`);
-    await expect(labelOption).toHaveCount(1); // asegura único
-    await labelOption.click();
-  }
-  */
 }
